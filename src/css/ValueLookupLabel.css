@@ -1,0 +1,11 @@
+.value-lookup {
+    align-items: center;
+    display: flex;
+}
+
+.value-lookup-span {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18pt;
+    color: rgb(226, 101, 97);
+}

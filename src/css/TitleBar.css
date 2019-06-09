@@ -1,0 +1,13 @@
+.title-bar {
+    position: relative;
+    background-color: #d5e1ed;
+}
+
+.title-bar-text {
+    margin-left: 30px;
+    font-size: 16pt;
+    line-height: 1.5;
+    vertical-align: middle;
+    color: #000;
+    margin-bottom: 0 !important;
+}

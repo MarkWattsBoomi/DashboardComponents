@@ -1,0 +1,32 @@
+.image-button-row {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1em;
+}
+
+.image-button-row-button {
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 100%;
+    width: calc(100vw / 5);
+}
+
+.image-button-row-button-selected {
+    border: 2px solid red;
+}
+
+.image-button-row-button-icon {
+    display: block;
+    width: calc(100vw / 5);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-button-row-button-label {
+    display: block;
+    text-align: center;
+    font-size: calc(100vw / 25);
+    line-height: 1;
+    color: #333;
+}

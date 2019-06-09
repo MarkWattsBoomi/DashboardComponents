@@ -1,0 +1,41 @@
+.info-disc-array {
+    position: relative;
+    margin-top: 20px;
+}
+
+.info-disc-array-inner {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.info-disc-array-disc
+{
+    padding: 5px;
+    width: 170px;
+}
+
+.info-disc-array-disc-inner
+{
+    background-color: #df4848;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.info-disc-array-disc-icon {
+    font-size: 24pt;
+    text-align: center;
+    display: flex;
+}
+
+.info-disc-array-disc-value {
+    font-size: 24pt;
+    text-align: center;
+}
+
+.info-disc-array-disc-label {
+    font-size: 12pt;
+    text-align: center;
+}
