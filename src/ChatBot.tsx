@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as CommonFunctions from './common-functions';
 import './css/ChatBot.css';
 
-import { string } from 'prop-types';
-import { FlowComponent } from './models';
-import { IManywho } from './models/interfaces';
+import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
+import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
 declare const manywho: IManywho;
 

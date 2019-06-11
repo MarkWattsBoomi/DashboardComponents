@@ -1,12 +1,11 @@
-import { removeProperties } from '@babel/types';
 import * as React from 'react';
 import * as CommonFunctions from './common-functions';
 import './css/InfoPanel.css';
-import { FlowComponent } from './models/FlowComponent';
-import { FlowField } from './models/FlowField';
-import { FlowObjectData } from './models/FlowObjectData';
-import { FlowObjectDataArray } from './models/FlowObjectDataArray';
-import { IManywho } from './models/interfaces';
+import { FlowComponent } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
+import { FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
+import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
+import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
+import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
 declare const manywho: IManywho;
 

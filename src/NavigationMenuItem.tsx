@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './css/NavigationMenu.css';
-import { FlowBaseComponent } from './models/FlowBaseComponent';
-import { FlowObjectDataArray } from './models/FlowObjectDataArray';
+import {NavigationMenu} from './NavigationMenu';
+import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 
 export class NavigationMenuItem extends React.Component<any, any> {
 
@@ -27,9 +27,9 @@ export class NavigationMenuItem extends React.Component<any, any> {
 
     triggerMenuItem(tenant: string, flow_id: string, player: string, interactive: boolean) {
         if (interactive && interactive === true) {
-            (this.props.parent as FlowBaseComponent).launchFlowTab(tenant, flow_id, player, null);
+            (this.props.parent as NavigationMenu).launchFlowTab(tenant, flow_id, player, null);
         } else {
-            (this.props.parent as FlowBaseComponent).launchFlowSilent(tenant, flow_id, player, null);
+            (this.props.parent as NavigationMenu).launchFlowSilent(tenant, flow_id, player, null);
         }
         this.closeMenu();
     }

@@ -3,13 +3,11 @@ import * as React from 'react';
 // import { Text, View, StyleSheet,Alert,TouchableOpacity, Image } from 'react-native';
 // import Camera from 'react-native-camera';
 import './css/BarcodeScanner.css';
-import { FlowPage } from './models';
-import {FlowComponent} from './models/FlowComponent';
-import { eContentType } from './models/FlowField';
-import { FlowObjectData } from './models/FlowObjectData';
-import { FlowObjectDataArray } from './models/FlowObjectDataArray';
-import { FlowObjectDataProperty } from './models/FlowObjectDataProperty';
-import { IManywho } from './models/interfaces';
+import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
+import { eContentType } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
+import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
+import { FlowObjectDataProperty } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataProperty';
+import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
 declare const manywho: IManywho;
 
@@ -30,6 +28,7 @@ class BarcodeScanner extends FlowComponent {
     code: string;
     type: string;
     scanning: boolean = false;
+    identifySuccess: boolean = false;
 
     bnf: any = {};
 
@@ -38,6 +37,7 @@ class BarcodeScanner extends FlowComponent {
         this.onBarCodeRead = this.onBarCodeRead.bind(this);
         this.startScan = this.startScan.bind(this);
         this.acceptResult = this.acceptResult.bind(this);
+        this.addToBNF = this.addToBNF.bind(this);
         this.loadBNF = this.loadBNF.bind(this);
         this.lookupBarcode = this.lookupBarcode.bind(this);
     }
@@ -81,12 +81,22 @@ class BarcodeScanner extends FlowComponent {
         }
     }
 
+    async addToBNF() {
+        const addOutcome: string = this.getAttribute('addOutcome', 'add');
+        // alert(acceptOutcome);
+        if (addOutcome !== '') {
+            // alert('triggering');
+            await this.triggerOutcome(addOutcome);
+        }
+    }
+
     startScan() {
         this.code = '';
         this.type = '';
         this.forceUpdate();
         const video = this.video;
         const self = this;
+        this.identifySuccess = false;
         Quagga.init(
             {
                 halfSample: false,
@@ -137,7 +147,7 @@ class BarcodeScanner extends FlowComponent {
     onBarCodeRead = (data: any) => {
         const medicine: FlowObjectData = this.lookupBarcode(data.codeResult.code);
 
-        if (medicine) {
+        if (medicine && medicine !== null) {
             const taken: FlowObjectData = FlowObjectData.newInstance('TakenMedicine');
             taken.addProperty(FlowObjectDataProperty.newInstance('Name', eContentType.ContentString, medicine.properties['Name'].value));
             taken.addProperty(FlowObjectDataProperty.newInstance('Dose', eContentType.ContentNumber, medicine.properties['DosageMg'].value));
@@ -147,6 +157,8 @@ class BarcodeScanner extends FlowComponent {
 
             this.setStateValue(taken);
             this.code = (medicine.properties['Name'].value as string) + ' ' + (medicine.properties['DosageMg'].value as string) + 'mg ' + (medicine.properties['manufacturer'].value as string);
+
+            this.identifySuccess = true;
         } else {
             const taken: FlowObjectData = FlowObjectData.newInstance('TakenMedicine');
             taken.addProperty(FlowObjectDataProperty.newInstance('Name', eContentType.ContentString, data.codeResult.code));
@@ -158,6 +170,7 @@ class BarcodeScanner extends FlowComponent {
             this.setStateValue(taken);
             this.code = data.codeResult.code;
             this.type = data.codeResult.format;
+            this.identifySuccess = false;
         }
 
         Quagga.stop();
@@ -166,7 +179,7 @@ class BarcodeScanner extends FlowComponent {
         }
 
     fake = () => {
-        this.onBarCodeRead({codeResult: {code: '5000436574637'}});
+        this.onBarCodeRead({codeResult: {code: '9999999999999'}});
             }
 
     render() {
@@ -190,6 +203,16 @@ class BarcodeScanner extends FlowComponent {
                 </div>
             );
         }*/
+        let actionButton: any;
+        if (this.identifySuccess === true) {
+            actionButton = (
+                <button className="barcode-scanner-button" onClick={this.acceptResult}>Accept</button>
+            );
+        } else {
+            actionButton = (
+                <button className="barcode-scanner-button" onClick={this.addToBNF}>Add to BNF</button>
+            );
+        }
 
         if (this.code  && this.code.length > 0) {
             result = (
@@ -201,7 +224,7 @@ class BarcodeScanner extends FlowComponent {
                     <div className="barcode-scanner-result-row">
                         <span className="barcode-scanner-button-bar">
                             <button className="barcode-scanner-button" onClick={this.startScan}>Scan</button>
-                            <button className="barcode-scanner-button" onClick={this.acceptResult}>Accept</button>
+                            {actionButton}
                         </span>
                     </div>
                 </div>

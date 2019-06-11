@@ -1,13 +1,13 @@
 import * as React from 'react';
 import './css/NavigationMenu.css';
-import { eSortOrder, FlowObjectDataArray } from './models/FlowObjectDataArray';
-import { FlowPage } from './models/FlowPage';
-import { IManywho } from './models/interfaces';
 import { NavigationMenuItem } from './NavigationMenuItem';
+import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
+import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
+import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
 declare const manywho: IManywho;
 
-class NavigationMenu extends FlowPage {
+export class NavigationMenu extends FlowPage {
 
     waitSpinner = 'https://media.giphy.com/media/6Egwsh5J2kvhmXALVu/giphy.gif';
 

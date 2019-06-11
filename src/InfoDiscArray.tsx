@@ -1,11 +1,9 @@
-import { JSXElement } from '@babel/types';
 import * as React from 'react';
 import * as CommonFunctions from './common-functions';
 import './css/InfoDiscArray.css';
-import { FlowPage } from './models';
-import { FlowComponent } from './models/FlowComponent';
-import { FlowObjectDataArray } from './models/FlowObjectDataArray';
-import { IManywho } from './models/interfaces';
+import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
+import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
+import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
 declare const manywho: IManywho;
 
@@ -62,9 +60,9 @@ class InfoDiscArray extends FlowPage {
 
         let img: any;
         if (icon.startsWith('http')) {
-            img = (<img src={icon} style={{width: '50px', height: '50px', marginLeft: 'auto', marginRight: 'auto'}}></img>);
+            img = (<img src={icon} style={{width: '50px', height: '50px', marginLeft: 'auto', marginRight: 'auto'}}/>);
         } else {
-            img = (<span className={icon} style={{verticalAlign: 'sub'}}></span>);
+            img = (<span className={icon} style={{verticalAlign: 'sub'}}/>);
         }
         return (
             <div className="info-disc-array-disc" >
