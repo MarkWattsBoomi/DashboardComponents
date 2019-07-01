@@ -6,6 +6,7 @@ export * from './ImageButtonRow';
 export * from './ValueLookupLabel';
 export * from './OutcomeTile';
 export * from './NavigationMenu';
+export * from './MenuBar';
 export * from './TitleBar';
 export * from './ChatBot';
 export * from './Footer';
