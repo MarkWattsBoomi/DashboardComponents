@@ -37,6 +37,14 @@ export class NavigationMenu extends FlowPage {
             const userSummary: string = 'Flow Developer';
             let avatar: string = '';
 
+            const logos: any[] = [];
+            const logoBits = logo.split(/[ ,;]+/);
+            logoBits.forEach((logoBit: string) => {
+                if (logoBit.trim().length > 0) {
+                    logos.push(<img className="nav-header-icon-img" src={logoBit.trim()} width="3vw" />);
+                }
+            });
+
             let userElement: JSX.Element;
             if (hideUser === false) {
                 if (username.trim() === '') {
@@ -77,7 +85,7 @@ export class NavigationMenu extends FlowPage {
             return (
                         <div className="nav-header">
                             <div className="nav-header-icon">
-                                <img className="nav-header-icon-img" src={logo} width="3vw"/>
+                                {logos}
                             </div>
                             <div className="nav-header-title">
                                 <div style={{marginTop: 'auto', marginBottom: 'auto'}}>
