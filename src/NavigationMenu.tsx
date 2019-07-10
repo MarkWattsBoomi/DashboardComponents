@@ -34,8 +34,11 @@ export class NavigationMenu extends FlowPage {
 
             const username: string = this.user.firstName + ' ' + this.user.lastName;
             const userid: string = this.user.email;
-            const userSummary: string = 'Flow Developer';
+            const userSummary: string = this.user.userName;
             let avatar: string = '';
+
+            const tenant = this.tenantId;
+            avatar = 'https://files-manywho-com.s3.amazonaws.com/' + tenant + '/' + userid + '.jpg';
 
             const logos: any[] = [];
             const logoBits = logo.split(/[ ,;]+/);
@@ -73,9 +76,6 @@ export class NavigationMenu extends FlowPage {
                                 </div>);
                 }
             }
-            const tenant = this.tenantId;
-
-            avatar = 'https://files-manywho-com.s3.amazonaws.com/' + tenant + '/' + userid + '.jpg';
 
             // loop over menu items
             const links: JSX.Element[] = [];

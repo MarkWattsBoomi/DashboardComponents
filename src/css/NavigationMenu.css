@@ -66,7 +66,7 @@
 
 .user-name
 {
-    color: #ccc;
+    color: #666;
     font-size: 14pt;
     line-height: 0.5;
     vertical-align: text-bottom;
@@ -74,7 +74,7 @@
 
 .user-summary
 {
-    color: #ccc;
+    color: #666;
     font-size: 10pt;
     line-height: 0.5;
     vertical-align: middle;
