@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { calculateValue } from './common-functions';
 import './css/MenuBar.css';
 import {MenuBar} from './MenuBar';
 import { eContentType, FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
@@ -29,11 +30,11 @@ export class MenuBarItem extends React.Component<any, any> {
         this.forceUpdate();
     }
 
-    triggerMenuItem(tenant: string, flow_id: string, player: string, interactive: boolean) {
+    triggerMenuItem(tenant: string, flowId: string, player: string, interactive: boolean) {
         if (interactive && interactive === true) {
-            (this.props.parent as MenuBar).launchFlowTab(tenant, flow_id, player, null);
+            (this.props.parent as MenuBar).launchFlowTab(tenant, flowId, player, null);
         } else {
-            (this.props.parent as MenuBar).launchFlowSilent(tenant, flow_id, player, null);
+            (this.props.parent as MenuBar).launchFlowSilent(tenant, flowId, player, null);
         }
         this.closeMenu();
     }
@@ -75,22 +76,22 @@ export class MenuBarItem extends React.Component<any, any> {
         // prep any shown menus
         const SubMenus: JSX.Element[] = [];
         if (this.subMenu !== null) {
-            const subMenuItems: FlowObjectDataArray = this.props.parent.fields[this.props.menuItem.properties.value.value].value;
+            const subMenuItems: FlowObjectDataArray = this.props.parent.fields[calculateValue(this.props.parent, this.props.menuItem.properties.value.value)].value;
             for (const item of subMenuItems.items) {
-                SubMenus.push(<div
-                                className="menu-bar-sub-menu">
-                                <span className={'glyphicon glyphicon-' + item.properties.icon.value}></span>
+                SubMenus.push(
+                            <div
+                                className="menu-bar-sub-menu"
+                            >
+                                <span className={'glyphicon glyphicon-' + item.properties.icon.value} />
                                 <span
                                     className={'menu-bar-menu'}
                                     title={item.properties.caption.value as string}
-                                    onClick={() => this.triggerMenuItem(item.properties.tenant.value as string,
-                                        item.properties.flow_id.value as string,
-                                        item.properties.player.value as string,
-                                        item.properties.interactive.value as boolean)}
+                                    onClick={() => this.triggerMenuItem(item.properties.tenant.value as string, item.properties.flow_id.value as string, item.properties.player.value as string, item.properties.interactive.value as boolean)}
                                 >
                                     {item.properties.caption.value}
                                 </span>
-                            </div>);
+                            </div>,
+                            );
             }
         }
 
@@ -99,7 +100,7 @@ export class MenuBarItem extends React.Component<any, any> {
         switch (this.props.menuItem.properties.type.value.toUpperCase()) {
             case 'IMAGE':
                     span = (
-                        <img className="menu-bar-image" src={this.props.menuItem.properties.value.value}></img>
+                        <img className="menu-bar-image" src={calculateValue(this.props.parent, this.props.menuItem.properties.value.value)} />
                         );
                     break;
 
@@ -107,16 +108,20 @@ export class MenuBarItem extends React.Component<any, any> {
                     span = (
                         <div>
                             <div
-                                onClick={() => action(this.props.menuItem.properties.value.value)}
-                                style={{whiteSpace: 'nowrap'}}>
-                                <span className={menuIcon} style={{color: '#ccc'}}></span>
+                                onClick={(e) => { action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value)); }}
+                                style={{whiteSpace: 'nowrap'}}
+                            >
+                                <span className={menuIcon} style={{color: '#ccc'}} />
                                 <span
                                     className={'menu-bar-menu' + hot}
-                                    title={this.props.menuItem.properties.label.value}>
+                                    title={this.props.menuItem.properties.label.value}
+                                >
                                     {this.props.menuItem.properties.label.value}
                                 </span>
                             </div>
-                            <div style={{position: 'absolute', zIndex: 1000, marginTop: '10px'}}>
+                            <div
+                                style={{position: 'absolute', zIndex: 1000, marginTop: '10px'}}
+                            >
                                 {SubMenus}
                             </div>
 
@@ -131,14 +136,15 @@ export class MenuBarItem extends React.Component<any, any> {
                             <span
                                 className={'glyphicon glyphicon-' + this.props.menuItem.properties.icon.value + hot + ' menu-bar-button'}
                                 title={this.props.menuItem.properties.label.value}
-                                onClick={() => action(this.props.menuItem.properties.value.value)}>
-                            </span>
+                                onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}
+                             />
                             );
                     } else {
                         span = (
                             <span
                                 className={'menu-bar-link' + hot} title={this.props.menuItem.properties.label.value}
-                                onClick={() => action(this.props.menuItem.properties.value.value)}>
+                                onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}
+                            >
                                 {this.props.menuItem.properties.label.value}
                             </span>
                             );
@@ -146,40 +152,9 @@ export class MenuBarItem extends React.Component<any, any> {
                     break;
             case 'LABEL':
             default:
-                span = <span className={'menu-bar-label'}>{this.calculateValue(this.props.menuItem)}</span>;
+                span = <span className={'menu-bar-label'}>{calculateValue(this.props.parent, this.props.menuItem.properties.value.value)}</span>;
         }
         return span;
-    }
-
-    calculateValue(menuItem: FlowObjectData): string {
-        if ((menuItem.properties.value.value as string).startsWith('{{') && (menuItem.properties.value.value as string).endsWith('}}')) {
-            // value points to a field, get it's value
-            let stripped: string = (menuItem.properties.value.value as string).replace('{{', '');
-            stripped = stripped.replace('}}', '');
-
-            let val: any;
-            let result: string = '';
-            const strippedBits: string[] = stripped.split('.');
-
-            for (let pos = 0 ; pos < strippedBits.length ; pos++) {
-                if (pos === 0) {
-                    val = (this.props.parent as FlowPage).fields[strippedBits[pos]];
-                    if (val.ContentType !== eContentType.ContentObject && val.ContentType !== eContentType.ContentList) {
-                    result = val.value as string;
-                    }
-                } else {
-                    const ele = (val.value as FlowObjectData).properties[strippedBits[pos]];
-                    if (ele.contentType === eContentType.ContentObject || ele.contentType === eContentType.ContentList) {
-                        val = (val.value as FlowObjectData).properties[strippedBits[pos]].value;
-                    } else {
-                        result = (val.value as FlowObjectData).properties[strippedBits[pos]].value as string;
-                    }
-                }
-            }
-            return result;
-        } else {
-            return (menuItem.properties.label.value as string);
-        }
     }
 
 }

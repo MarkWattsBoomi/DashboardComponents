@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { calculateValue } from './common-functions';
 import './css/NavigationMenu.css';
 import {NavigationMenu} from './NavigationMenu';
 import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
@@ -92,7 +93,7 @@ export class NavigationMenuItem extends React.Component<any, any> {
         switch (this.props.menuItem.properties.type.value.toUpperCase()) {
             case 'IMAGE':
                     span = (
-                        <img className="nav-header-controls-image" src={this.props.menuItem.properties.value.value}></img>
+                        <img className="nav-header-controls-image" src={calculateValue(this.props.parent, this.props.menuItem.properties.value.value)}></img>
                         );
                     break;
 
@@ -100,7 +101,7 @@ export class NavigationMenuItem extends React.Component<any, any> {
                     span = (
                         <div>
                             <div
-                                onClick={() => action(this.props.menuItem.properties.value.value)}
+                                onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}
                                 style={{whiteSpace: 'nowrap'}}>
                                 <span className={menuIcon} style={{color: '#ccc'}}></span>
                                 <span
@@ -124,14 +125,14 @@ export class NavigationMenuItem extends React.Component<any, any> {
                             <span
                                 className={'glyphicon glyphicon-' + this.props.menuItem.properties.icon.value + hot + ' nav-header-controls-button'}
                                 title={this.props.menuItem.properties.label.value}
-                                onClick={() => action(this.props.menuItem.properties.value.value)}>
+                                onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}>
                             </span>
                             );
                     } else {
                         span = (
                             <span
                                 className={'nav-header-link' + hot} title={this.props.menuItem.properties.label.value}
-                                onClick={() => action(this.props.menuItem.properties.value.value)}>
+                                onClick={() => action(this.props.parent, calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}>
                                 {this.props.menuItem.properties.label.value}
                             </span>
                             );

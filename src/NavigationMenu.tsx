@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { calculateValue } from './common-functions';
 import './css/NavigationMenu.css';
 import { NavigationMenuItem } from './NavigationMenuItem';
 import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
@@ -27,7 +28,7 @@ export class NavigationMenu extends FlowPage {
 
             const menuItems: FlowObjectDataArray = this.model.dataSource;
             const logo: string = this.getAttribute('logo', '');
-            const title: string = this.getAttribute('title', '');
+            const title: string = calculateValue(this, this.getAttribute('title', ''));
             const hideUserAnonymous: boolean = this.getAttribute('hide-user-anonymous', 'false') === 'true' ? true : false;
             const hideUser: boolean = this.getAttribute('hide-user', 'false') === 'true' ? true : false;
             const subTitle: string = ''; // this.getAttribute('sub-title', '');
@@ -65,7 +66,8 @@ export class NavigationMenu extends FlowPage {
                         );
                     }
                 } else {
-                    userElement = (<div className="nav-header-user">
+                    userElement = (
+                                <div className="nav-header-user">
                                     <div style={{marginTop: 'auto', marginBottom: 'auto', marginRight: '10px'}}>
                                         <img className="nav-header-avatar" src={avatar} width="48" height="48"/>
                                     </div>
@@ -73,7 +75,8 @@ export class NavigationMenu extends FlowPage {
                                         <span className="user-name">{username}</span><br/>
                                         <span className="user-summary">{userSummary}</span>
                                     </div>
-                                </div>);
+                                </div>
+                                );
                 }
             }
 

@@ -58,7 +58,7 @@ class InfoDisc extends FlowComponent {
         <div className="info-disk">
             <div className="info-disk-inner" style={style}>
                 <div className="info-disk-icon">
-                    <span className={icon}></span>
+                    <span className={icon}/>
                 </div>
                 <div className="info-disk-value">
                     {value}
