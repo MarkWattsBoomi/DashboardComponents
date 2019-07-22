@@ -26,7 +26,7 @@ The exact function of each menu item is defined in the pre-requisite MenuItem ty
 MenuItem{
     label       string  the display text for the item, the caption
     value       string  the value used when this menu item is triggered e.g. the name of the outcome to trigger 
-                        or the Uri to open in a new tab etc.
+                        or the Uri to open in a new tab etc.  Can be surrounded with double braces {{xx.yy.zz}} to do value lookup.
     icon        string  the bootstrap glyphicon to display, just the short name without the "glyphicon-" part e.g. envelope or wrench.  
                         if not specifed then it shows the label, this controls if it's an icon or text menu item
     type        string  the action type NAVIGATE, OPEN, OUTCOME, MENU, FUNCTION
@@ -66,7 +66,7 @@ The Footer component shows a simple bar at the bottom of the page in which you c
 Drop a component on your page, change its componentType to Footer, set its DataSource to your MenuItem list and add these attributes: -
 
 ```
-title                   string      the text to be displayed in the footer.
+title   string  The text to be displayed in the footer. Can be surrounded with double braces {{xx.yy.zz}} to do value lookup.
 ```
 
 
