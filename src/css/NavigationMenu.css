@@ -34,9 +34,10 @@
 
 .nav-header-icon-img
 {
-    min-width: 120px;
+    max-height: 70px;
     margin-left: 1vw;
     margin-right: auto;
+    object-fit: scale-down;
 }
 
 .nav-header-title-old

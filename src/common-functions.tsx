@@ -40,8 +40,12 @@ export function calculateValue(parent: FlowPage, value: string): string {
         for (let pos = 0 ; pos < strippedBits.length ; pos++) {
             if (pos === 0) {
                 val = (parent as FlowPage).fields[strippedBits[pos]];
-                if (val.ContentType !== eContentType.ContentObject && val.ContentType !== eContentType.ContentList) {
-                result = val.value as string;
+                if (!val) {
+                    alert('The Value [' + strippedBits[pos] + '] was not found, have you included it in your flow');
+                } else {
+                    if (val.ContentType !== eContentType.ContentObject && val.ContentType !== eContentType.ContentList) {
+                    result = val.value as string;
+                    }
                 }
             } else {
                 const ele = (val.value as FlowObjectData).properties[strippedBits[pos]];

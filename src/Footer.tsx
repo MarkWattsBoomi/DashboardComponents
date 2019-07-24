@@ -20,7 +20,7 @@ class Footer extends FlowPage {
            // const queueGroups = this.values.filter((value: Value) => value.stateValue.developerName === 'UserQueues')[0];
             // const queueItems = this.values.filter((value: Value) => value.stateValue.developerName === 'QueueItems')[0];
             // const queueItemRequest = this.values.filter((value: Value) => value.stateValue.developerName === 'QueueItemRequest')[0];
-            const text: string = calculateValue(this, this.getAttribute('title', '&copy; Boomi Flow - 2019'));
+            const text: string = calculateValue(this, this.getAttribute('title', '© Boomi Flow 2019'));
             return (
                 <div className="footer">
                 <span className="footer-text">{text}</span>

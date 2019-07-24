@@ -27,10 +27,10 @@ export class NavigationMenu extends FlowPage {
             // the datasource tells us the name of the menu items array
 
             const menuItems: FlowObjectDataArray = this.model.dataSource;
-            const logo: string = this.getAttribute('logo', '');
+            const logo: string = calculateValue(this, this.getAttribute('logo', ''));
             const title: string = calculateValue(this, this.getAttribute('title', ''));
-            const hideUserAnonymous: boolean = this.getAttribute('hide-user-anonymous', 'false') === 'true' ? true : false;
-            const hideUser: boolean = this.getAttribute('hide-user', 'false') === 'true' ? true : false;
+            const hideUserAnonymous: boolean = calculateValue(this, this.getAttribute('hide-user-anonymous', 'false')).toLowerCase() === 'true' ? true : false;
+            const hideUser: boolean = calculateValue(this, this.getAttribute('hide-user', 'false')).toLowerCase() === 'true' ? true : false;
             const subTitle: string = ''; // this.getAttribute('sub-title', '');
 
             const username: string = this.user.firstName + ' ' + this.user.lastName;
@@ -45,7 +45,7 @@ export class NavigationMenu extends FlowPage {
             const logoBits = logo.split(/[ ,;]+/);
             logoBits.forEach((logoBit: string) => {
                 if (logoBit.trim().length > 0) {
-                    logos.push(<img className="nav-header-icon-img" src={logoBit.trim()} width="3vw" />);
+                    logos.push(<img className="nav-header-icon-img" src={logoBit.trim()} />);
                 }
             });
 
