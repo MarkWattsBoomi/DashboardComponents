@@ -5,6 +5,7 @@ import { NavigationMenuItem } from './NavigationMenuItem';
 import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
 import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
+import { FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
 
 declare const manywho: IManywho;
 
@@ -22,6 +23,15 @@ export class NavigationMenu extends FlowPage {
     }
 
     render() {
+
+        
+
+        (this.fields["myfield"] as FlowField).value
+        
+        
+        
+        
+        
         if (this.loadingState !== 'initial') {
 
             // the datasource tells us the name of the menu items array
