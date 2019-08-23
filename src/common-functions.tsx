@@ -27,7 +27,10 @@ export function makeDisplayValue(value: string, type: string): JSX.Element {
 // this takes a string containing either a literal value or the name of a field surrounded with {{..}}
 // if it's literal it just returns otherwise it gets the value.
 // it can go down levels like val.attribute.subval etc
-export function calculateValue(parent: FlowPage, value: string): string {
+// NOTE: there's a good chance timing wise that there are no fields yet
+//       so we just return value if any errors are encountered like val === null
+export function calculateValue(parentPage: FlowPage, value: string): string {
+    // is it replaceable?  starts and ends with {{}}
     if (value.startsWith('{{') && value.endsWith('}}')) {
         // value points to a field, get it's value
         let stripped: string = value.replace('{{', '');
@@ -35,24 +38,37 @@ export function calculateValue(parent: FlowPage, value: string): string {
 
         let val: any;
         let result: string = '';
+        // it could be a sub field with parent.child
         const strippedBits: string[] = stripped.split('.');
 
+        // loop over bits
         for (let pos = 0 ; pos < strippedBits.length ; pos++) {
+            // pos 0 will set val for any child elements
             if (pos === 0) {
-                val = (parent as FlowPage).fields[strippedBits[pos]];
+                val = (parentPage as FlowPage).fields[strippedBits[pos]];
                 if (!val) {
-                    alert('The Value [' + strippedBits[pos] + '] was not found, have you included it in your flow');
+                    console.log('The Value [' + strippedBits[pos] + '] was not found, have you included it in your flow');
+                    result = value;
                 } else {
                     if (val.ContentType !== eContentType.ContentObject && val.ContentType !== eContentType.ContentList) {
                     result = val.value as string;
                     }
                 }
             } else {
-                const ele = (val.value as FlowObjectData).properties[strippedBits[pos]];
-                if (ele.contentType === eContentType.ContentObject || ele.contentType === eContentType.ContentList) {
-                    val = (val.value as FlowObjectData).properties[strippedBits[pos]].value;
+                // did bits 0 get a val?
+                if (val) {
+                    const ele = (val.value as FlowObjectData).properties[strippedBits[pos]];
+                    if (ele) {
+                        if (ele.contentType === eContentType.ContentObject || ele.contentType === eContentType.ContentList) {
+                            val = (val.value as FlowObjectData).properties[strippedBits[pos]].value;
+                        } else {
+                            result = (val.value as FlowObjectData).properties[strippedBits[pos]].value as string;
+                        }
+                    } else {
+                        result = value;
+                    }
                 } else {
-                    result = (val.value as FlowObjectData).properties[strippedBits[pos]].value as string;
+                    result = value;
                 }
             }
         }
