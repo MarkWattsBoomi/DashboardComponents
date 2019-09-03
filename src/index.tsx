@@ -1,3 +1,4 @@
+export * from './IconProgressBar';
 export * from './InfoCell';
 export * from './InfoDisc';
 export * from './InfoDiscArray';
@@ -11,3 +12,4 @@ export * from './TitleBar';
 export * from './ChatBot';
 export * from './Footer';
 export * from './BarcodeScanner';
+export * from './Selfie';

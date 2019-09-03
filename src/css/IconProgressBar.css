@@ -1,0 +1,36 @@
+.icon-progress-bar
+{
+    background-color: #242b39;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+}
+
+.icon-progress-bar-inner
+{
+    display: flex;
+    justify-content: left;
+}
+
+.icon-progress-bar-icon
+{
+    display: inline-block;
+    font-size: 48px;
+    color: #fefefe;
+    margin-right: 50px;
+}
+
+.icon-progress-bar-icon-complete
+{
+    color: #3797ff;
+}
+
+.icon-progress-bar-icon-active
+{
+    color: #fefefe;
+}
+
+.icon-progress-bar-icon-incomplete
+{
+    color: #bbbbbb;
+}

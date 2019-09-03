@@ -93,7 +93,10 @@ export class NavigationMenuItem extends React.Component<any, any> {
         switch (this.props.menuItem.properties.type.value.toUpperCase()) {
             case 'IMAGE':
                     span = (
-                        <img className="nav-header-controls-image" src={calculateValue(this.props.parent, this.props.menuItem.properties.value.value)}></img>
+                        <img
+                            className="nav-header-controls-image"
+                            src={calculateValue(this.props.parent, this.props.menuItem.properties.value.value)}
+                        />
                         );
                     break;
 
@@ -121,6 +124,27 @@ export class NavigationMenuItem extends React.Component<any, any> {
             case 'OUTCOME':
             case 'FUNCTION':
                     if (this.props.menuItem.properties.icon.value && this.props.menuItem.properties.icon.value.length > 0) {
+                        if ((this.props.menuItem.properties.icon.value as string).startsWith('http')) {
+                            // it's an absolute image url
+                            span = (
+                                <img
+                                    className="nav-header-controls-image"
+                                    src={calculateValue(this.props.parent, this.props.menuItem.properties.icon.value)}
+                                    title={this.props.menuItem.properties.label.value}
+                                    onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}
+                                />
+                                );
+                            break;
+                        } else {
+                            // it's a glyphicon
+                            span = (
+                                <span
+                                    className={'glyphicon glyphicon-' + this.props.menuItem.properties.icon.value + hot + ' nav-header-controls-button'}
+                                    title={this.props.menuItem.properties.label.value}
+                                    onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}>
+                                </span>
+                            );
+                        }
                         span = (
                             <span
                                 className={'glyphicon glyphicon-' + this.props.menuItem.properties.icon.value + hot + ' nav-header-controls-button'}

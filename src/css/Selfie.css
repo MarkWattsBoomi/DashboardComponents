@@ -1,0 +1,33 @@
+.selfie {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+}
+
+.selfie-inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selfie-video {
+    width: 100%;
+    z-index: 1;
+    position: 'relative';
+}
+
+.selfie-image {
+    width: 100%;
+    z-index: 1;
+    position: 'relative';
+}
+
+.selfie-svg {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events:none;
+}
