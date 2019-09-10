@@ -20,7 +20,7 @@ class Selfie extends FlowComponent {
         this.captureVideo(1);
     }
 
-    takePhoto(e: any) {
+    async takePhoto(e: any) {
         const canvas = document.createElement('canvas');
         canvas.height = this.video.videoHeight;
         canvas.width = this.video.videoWidth;
@@ -29,11 +29,27 @@ class Selfie extends FlowComponent {
         this.imageData =  canvas.toDataURL();
         this.setStateValue(this.imageData);
 
+        // is there an outcome to trigger?
+        if (this.getAttribute('takePhotoOutcome', '').length > 0) {
+            if (this.outcomes[this.getAttribute('takePhotoOutcome', '')]) {
+            await this.triggerOutcome(this.getAttribute('takePhotoOutcome', ''));
+            }
+        }
+
         this.capturing = false;
         this.forceUpdate();
     }
 
     async captureVideo(e: any) {
+
+        this.setStateValue('');
+
+        // is there an outcome to trigger?
+        if (this.getAttribute('takePhotoOutcome', '').length > 0) {
+            if (this.outcomes[this.getAttribute('takePhotoOutcome', '')]) {
+            await this.triggerOutcome(this.getAttribute('takePhotoOutcome', ''));
+            }
+        }
         this.capturing = true;
         await this.forceUpdate();
         const video = this.video;
