@@ -131,6 +131,9 @@ export class MenuBarItem extends React.Component<any, any> {
 
             case 'OUTCOME':
             case 'FUNCTION':
+            case 'OPEN':
+            case 'NAVIGATE':
+
                     if (this.props.menuItem.properties.icon.value && this.props.menuItem.properties.icon.value.length > 0) {
                         span = (
                             <span
@@ -150,9 +153,10 @@ export class MenuBarItem extends React.Component<any, any> {
                             );
                     }
                     break;
+
             case 'LABEL':
             default:
-                span = <span className={'menu-bar-label'}>{calculateValue(this.props.parent, this.props.menuItem.properties.value.value)}</span>;
+                span = <span className={'menu-bar-label'}>{calculateValue(this.props.parent, this.props.menuItem.properties.label.value)}</span>;
         }
         return span;
     }
