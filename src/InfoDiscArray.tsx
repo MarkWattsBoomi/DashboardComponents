@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as CommonFunctions from './common-functions';
 import './css/InfoDiscArray.css';
+import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
 import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
 import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
@@ -18,35 +19,36 @@ class InfoDiscArray extends FlowPage {
 
         const discs = [];
 
-        if (this.loadingState === 'initial') { return null; }
+        if (this.loadingState === eLoadingState.ready) {
 
-        const exTypes: FlowObjectDataArray = this.fields[this.attributes.lookup.value].value as FlowObjectDataArray;
+            const exTypes: FlowObjectDataArray = this.fields[this.attributes.lookup.value].value as FlowObjectDataArray;
 
-        const lookups: any = {};
-        for (const item of exTypes.items) {
-            lookups[item.properties['value'].value as string] = item;
-        }
+            const lookups: any = {};
+            for (const item of exTypes.items) {
+                lookups[item.properties['value'].value as string] = item;
+            }
 
-        for (const target of this.model.dataSource.items) {
-            // target.properties.Amount is quantity
-            // target.properties.ExerciseType ties to ExersiseTypes.value to get label and icon
-            const icon = lookups[target.properties['ExerciseType'].value as string].properties['icon'].value;
-            const label = lookups[target.properties['ExerciseType'].value as string].properties['label'].value;
-            const color = lookups[target.properties['ExerciseType'].value as string].properties['color'].value;
-            const bgcolor = lookups[target.properties['ExerciseType'].value as string].properties['bgcolor'].value;
-            discs.push(this.makeDisk(icon , label, bgcolor, color, target.properties['Amount'].value as number, 50));
-        }
+            for (const target of this.model.dataSource.items) {
+                // target.properties.Amount is quantity
+                // target.properties.ExerciseType ties to ExersiseTypes.value to get label and icon
+                const icon = lookups[target.properties['ExerciseType'].value as string].properties['icon'].value;
+                const label = lookups[target.properties['ExerciseType'].value as string].properties['label'].value;
+                const color = lookups[target.properties['ExerciseType'].value as string].properties['color'].value;
+                const bgcolor = lookups[target.properties['ExerciseType'].value as string].properties['bgcolor'].value;
+                discs.push(this.makeDisk(icon , label, bgcolor, color, target.properties['Amount'].value as number, 50));
+            }
 
-        // discs.push(this.makeDisk('glyphicon glyphicon-euro', 'test', 'green', 75, 50));
-        // discs.push(this.makeDisk('glyphicon glyphicon-wrench', 'cycling', 'blue', 35, 50));
-        // discs.push(this.makeDisk('glyphicon glyphicon-wrench', 'cycling', 'blue', 35, 50));
-        return (
-        <div className="info-disc-array">
-            <div className="info-disc-array-inner">
-                {discs}
+            // discs.push(this.makeDisk('glyphicon glyphicon-euro', 'test', 'green', 75, 50));
+            // discs.push(this.makeDisk('glyphicon glyphicon-wrench', 'cycling', 'blue', 35, 50));
+            // discs.push(this.makeDisk('glyphicon glyphicon-wrench', 'cycling', 'blue', 35, 50));
+            return (
+            <div className="info-disc-array">
+                <div className="info-disc-array-inner">
+                    {discs}
+                </div>
             </div>
-        </div>
-        );
+            );
+        }
     }
 
     makeDisk(icon: string, label: string, bgColor: string, color: string, pcComplete: number, width: number) {

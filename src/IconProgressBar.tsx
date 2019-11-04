@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import './css/IconProgressBar.css';
+import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
 import { FlowComponent } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
 import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
 import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
@@ -29,7 +30,7 @@ export class IconProgressBar extends FlowComponent {
 
         const status: number = parseInt(this.getStateValue() as string);
 
-        if (this.loadingState !== 'initial') {
+        if (this.loadingState === eLoadingState.ready) {
 
             // load the icon array
             let data: any[] = [];

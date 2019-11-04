@@ -2,6 +2,7 @@ import * as React from 'react';
 import { calculateValue } from './common-functions';
 import './css/NavigationMenu.css';
 import { NavigationMenuItem } from './NavigationMenuItem';
+import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
 import { FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
 import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
@@ -23,7 +24,7 @@ export class NavigationMenu extends FlowPage {
     }
 
     render() {
-        if (this.loadingState !== 'initial') {
+        if (this.loadingState === eLoadingState.ready) {
 
             // the datasource tells us the name of the menu items array
 

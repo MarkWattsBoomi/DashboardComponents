@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './css/MenuBar.css';
 import { MenuBarItem } from './MenuBarItem';
+import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
 import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
 import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
@@ -21,7 +22,7 @@ export class MenuBar extends FlowPage {
     }
 
     render() {
-        if (this.loadingState !== 'initial') {
+        if (this.loadingState === eLoadingState.ready) {
 
             // the datasource tells us the name of the menu items array
             const menuItems: FlowObjectDataArray = this.model.dataSource;

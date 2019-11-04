@@ -15,3 +15,4 @@ export * from './Footer';
 export * from './BarcodeScanner';
 export * from './Selfie';
 export * from './FlowMap';
+export * from './ActiveComboBox';
