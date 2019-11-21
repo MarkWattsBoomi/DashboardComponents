@@ -44,7 +44,7 @@ class FlowMap extends FlowComponent {
 
     async componentDidMount() {
         const googleMapScript = document.createElement('script');
-        googleMapScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ2cbjJkFl5qygZYcKrcZVTzfX70G_-nY&libraries=places';
+        googleMapScript.src = 'https://maps.googleapis.com/maps/api/js?key=***Y&libraries=places';
         window.document.body.appendChild(googleMapScript);
         googleMapScript.addEventListener('load', this.apiLoaded);
     }
