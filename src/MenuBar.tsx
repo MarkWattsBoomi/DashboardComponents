@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './css/Common.css';
 import './css/MenuBar.css';
 import { MenuBarItem } from './MenuBarItem';
 import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
@@ -19,6 +20,11 @@ export class MenuBar extends FlowPage {
         this.openOutcome = this.openOutcome.bind(this);
         this.closeApplication = this.closeApplication.bind(this);
         this.executeFunction = this.executeFunction.bind(this);
+    }
+
+    async componentDidMount() {
+        await super.componentDidMount();
+        this.forceUpdate();
     }
 
     render() {

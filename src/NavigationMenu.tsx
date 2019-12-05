@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { calculateValue } from './common-functions';
+import './css/Common.css';
 import './css/NavigationMenu.css';
 import { NavigationMenuItem } from './NavigationMenuItem';
 import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
@@ -23,6 +24,11 @@ export class NavigationMenu extends FlowPage {
         this.executeFunction = this.executeFunction.bind(this);
     }
 
+    async componentDidMount() {
+        await super.componentDidMount();
+        this.forceUpdate();
+    }
+
     render() {
         if (this.loadingState === eLoadingState.ready) {
 
@@ -33,15 +39,16 @@ export class NavigationMenu extends FlowPage {
             const title: string = calculateValue(this, this.getAttribute('title', ''));
             const hideUserAnonymous: boolean = calculateValue(this, this.getAttribute('hide-user-anonymous', 'false')).toLowerCase() === 'true' ? true : false;
             const hideUser: boolean = calculateValue(this, this.getAttribute('hide-user', 'false')).toLowerCase() === 'true' ? true : false;
+            const hideUserText: boolean = calculateValue(this, this.getAttribute('hide-user-text', 'false')).toLowerCase() === 'true' ? true : false;
             const subTitle: string = ''; // this.getAttribute('sub-title', '');
 
-            const username: string = this.user.firstName + ' ' + this.user.lastName;
-            const userid: string = this.user.email;
+            const userName: string = this.user.firstName + ' ' + this.user.lastName;
+            const userId: string = this.user.email;
             const userSummary: string = this.user.userName;
             let avatar: string = '';
 
             const tenant = this.tenantId;
-            avatar = 'https://files-manywho-com.s3.amazonaws.com/' + tenant + '/' + userid + '.jpg';
+            avatar = 'https://files-manywho-com.s3.amazonaws.com/' + tenant + '/' + userId + '.jpg';
 
             const logos: any[] = [];
             const logoBits = logo.split(/[ ,;]+/);
@@ -51,34 +58,43 @@ export class NavigationMenu extends FlowPage {
                 }
             });
 
+            let userTextBlock: any;
+            let userText: string;
+
+            /*
+            <div style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <span className="user-name">{'Anonymous'}</span><br/>
+                    <span className="user-summary">{'Unknown'}</span>
+                </div>
+                */
+            if (!hideUserText) {
+                userTextBlock = (
+                <div style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <span className="user-name">{userName.trim().length > 0 ? userName.trim() : 'Anonymous'}</span><br/>
+                    <span className="user-summary">{userSummary}</span>
+                </div>
+                );
+            }
+
+            userText = userName.trim().length > 0 ? userName.trim() : 'Anonymous' + ' ' + userSummary;
+
             let userElement: JSX.Element;
             if (hideUser === false) {
-                if (username.trim() === '') {
-                    if (!hideUserAnonymous) {
-                        userElement = (
-                            <div className="nav-header-user">
-                                <div style={{marginTop: 'auto', marginBottom: 'auto', marginRight: '10px'}}>
-                                    <img className="nav-header-avatar" src={avatar} width="48" height="48"/>
-                                </div>
-                                <div style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                    <span className="user-name">{'Anonymous'}</span><br/>
-                                    <span className="user-summary">{'Unknown'}</span>
-                                </div>
-                            </div>
-                        );
-                    }
-                } else {
+                if (!hideUserAnonymous) {
                     userElement = (
-                                <div className="nav-header-user">
-                                    <div style={{marginTop: 'auto', marginBottom: 'auto', marginRight: '10px'}}>
-                                        <img className="nav-header-avatar" src={avatar} width="48" height="48"/>
-                                    </div>
-                                    <div style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                        <span className="user-name">{username}</span><br/>
-                                        <span className="user-summary">{userSummary}</span>
-                                    </div>
-                                </div>
-                                );
+                        <div className="nav-header-user">
+                            <div style={{marginTop: 'auto', marginBottom: 'auto', marginRight: '10px'}}>
+                                <img
+                                    className="nav-header-avatar"
+                                    src={avatar}
+                                    width="48"
+                                    height="48"
+                                    title={userText}
+                                />
+                            </div>
+                            {userTextBlock}
+                        </div>
+                    );
                 }
             }
 

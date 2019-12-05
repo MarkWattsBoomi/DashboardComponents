@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { calculateValue } from './common-functions';
+import './css/Common.css';
 import './css/Footer.css';
 import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
 import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
@@ -14,6 +15,11 @@ class Footer extends FlowPage {
 
     constructor(props: any) {
         super(props);
+    }
+
+    async componentDidMount() {
+        await super.componentDidMount();
+        this.forceUpdate();
     }
 
     render() {

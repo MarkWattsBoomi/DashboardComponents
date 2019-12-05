@@ -1,0 +1,25 @@
+.mw-bs .container
+{
+    width: 100%;
+    height: 100%;
+    padding:0;
+    margin: 0;
+}
+
+.mw-bs .main:first-of-type
+{
+    margin: 0;
+    overflow: hidden;
+}
+
+.scrolling-container {
+    overflow-y: scroll;
+    position: relative;
+    height: calc(100vh - 130px);
+    margin-bottom: 0 !important;
+    background-color: transparent;
+}
+
+.padding-50px {
+    padding: 50px;
+}
