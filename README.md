@@ -16,7 +16,7 @@ Each one can be a NAVIGATE, FUNCTION, OPEN, OUTCOME or MENU
 NAVIGATE will redirect the current browser to another Uri page named in value.
 OPEN will open the Uri in a new tab named in value
 OUTCOME will trigger the specified outcome named in value
-FUNCTION will execute the JS function named in value
+FUNCTION will execute the JS function named in value, you can use "exit", "close" or "quit" to do a window.close.
 MENU allows specifying the name of a list (int the value field) which contains other MenuItems to form a child dropdown menu.
 ```
 
@@ -47,9 +47,10 @@ title                   string      the title bar title label
 sub-title               string      some smaller text to show under the title label
 hide-user-anonymous     boolean     true to completely hide the user details if in anonymous mode i.e. flow doesn't use authentication, false
 hide-user               boolean     true to completely hide the user details.
+hide-user-text          boolean     true will supress showing the user's name/info text
 ```
 
-If flow is using authenication then you should add a .jpg file for each user named with their email e.g. fred_bloggs@somewhere.com.jpg.  This image will be used for the user's avatar
+If flow is using authenication then you should add a .jpg file for each user named with their email e.g. fred_bloggs@somewhere.com.jpg.  This image will be used for the user's avatar.  You should also add a default user avatar for admin@manywho.com.jpg to represent the anonymous user.
 
 #   MenuBar
 Adds a colored sub menu.
