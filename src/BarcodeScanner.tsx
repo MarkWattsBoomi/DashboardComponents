@@ -1,15 +1,8 @@
 const Quagga = require('quagga');
+import { eContentType, FlowComponent, FlowObjectData, FlowObjectDataProperty } from 'flow-component-model';
 import * as React from 'react';
-// import { Text, View, StyleSheet,Alert,TouchableOpacity, Image } from 'react-native';
-// import Camera from 'react-native-camera';
-import './css/BarcodeScanner.css';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { eContentType } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
-import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
-import { FlowObjectDataProperty } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataProperty';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class BNFEntry {
     name: string;

@@ -1,10 +1,8 @@
+import { FlowComponent } from 'flow-component-model';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 import * as React from 'react';
-import * as CommonFunctions from './common-functions';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class FlowMap extends FlowComponent {
 

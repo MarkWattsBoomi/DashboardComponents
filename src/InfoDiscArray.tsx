@@ -1,12 +1,8 @@
+import { eLoadingState, FlowObjectDataArray, FlowPage } from 'flow-component-model';
 import * as React from 'react';
-import * as CommonFunctions from './common-functions';
 import './css/InfoDiscArray.css';
-import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
-import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
-import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class InfoDiscArray extends FlowPage {
 

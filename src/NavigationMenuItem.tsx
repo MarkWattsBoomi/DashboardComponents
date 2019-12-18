@@ -1,8 +1,8 @@
+import { FlowObjectDataArray } from 'flow-component-model';
 import * as React from 'react';
 import { calculateValue } from './common-functions';
 import './css/NavigationMenu.css';
 import {NavigationMenu} from './NavigationMenu';
-import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
 
 export class NavigationMenuItem extends React.Component<any, any> {
 

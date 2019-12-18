@@ -1,13 +1,8 @@
 
+import { FlowComponent, FlowObjectData } from 'flow-component-model';
 import * as React from 'react';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { eContentType } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
-import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
-import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
-import { FlowObjectDataProperty } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataProperty';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class ActiveComboBox extends FlowComponent {
 

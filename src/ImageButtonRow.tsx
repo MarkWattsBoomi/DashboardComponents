@@ -1,9 +1,8 @@
+import { FlowComponent } from 'flow-component-model';
 import * as React from 'react';
 import './css/ImageButtonRow.css';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class ImageButtonRow extends FlowComponent {
 

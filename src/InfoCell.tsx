@@ -1,14 +1,9 @@
+import { FlowComponent, FlowField, FlowObjectData, FlowObjectDataArray } from 'flow-component-model';
 import * as React from 'react';
 import * as CommonFunctions from './common-functions';
 import './css/InfoCell.css';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-import { FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
-import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
-import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
-
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class InfoCell extends FlowComponent {
 

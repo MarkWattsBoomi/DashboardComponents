@@ -1,12 +1,9 @@
+import { FlowComponent, FlowField, FlowObjectData } from 'flow-component-model';
 import * as React from 'react';
 import * as CommonFunctions from './common-functions';
 import './css/InfoDisc.css';
-import { FlowComponent } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
-import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class InfoDisc extends FlowComponent {
 

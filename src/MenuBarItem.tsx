@@ -1,12 +1,8 @@
+import { FlowObjectDataArray } from 'flow-component-model';
 import * as React from 'react';
 import { calculateValue } from './common-functions';
 import './css/MenuBar.css';
 import {MenuBar} from './MenuBar';
-import { eContentType, FlowField } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowField';
-import { FlowObjectData } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectData';
-import { FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
-import { FlowObjectDataProperty } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataProperty';
-import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
 
 export class MenuBarItem extends React.Component<any, any> {
 

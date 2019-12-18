@@ -1,13 +1,10 @@
+import { eLoadingState, FlowPage } from 'flow-component-model';
 import * as React from 'react';
 import { calculateValue } from './common-functions';
 import './css/Common.css';
 import './css/Footer.css';
-import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
-import {FlowComponent} from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowComponent';
-import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 class Footer extends FlowPage {
 

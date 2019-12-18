@@ -1,13 +1,10 @@
+import { eLoadingState, eSortOrder, FlowObjectDataArray, FlowPage } from 'flow-component-model';
 import * as React from 'react';
 import './css/Common.css';
 import './css/MenuBar.css';
 import { MenuBarItem } from './MenuBarItem';
-import { eLoadingState } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowBaseComponent';
-import { eSortOrder, FlowObjectDataArray } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowObjectDataArray';
-import { FlowPage } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/FlowPage';
-import { IManywho } from '/Operational Data/Flow UI Custom Components/2019 Version/FlowComponentModel/src/interfaces';
 
-declare const manywho: IManywho;
+declare const manywho: any;
 
 export class MenuBar extends FlowPage {
 
