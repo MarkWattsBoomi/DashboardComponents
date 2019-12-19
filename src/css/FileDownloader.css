@@ -1,0 +1,69 @@
+.file-box
+{
+    display: flex;
+    position: relative;
+}
+
+.file-box-header
+{
+    width: 100%;
+    height: 15%;
+    line-height: 15%;
+    background-color: #000000;
+    color: #fefefe;
+    position: absolute;
+}
+
+.text-file-box-header
+{
+    width: 100%;
+    height: 33%;
+    line-height: 33%;
+    background-color: #000000;
+    color: #fefefe;
+    position: absolute;
+}
+
+.file-box-header-left
+{
+    float: left;
+    display: flex;
+    align-items: left;
+    height: 100%;
+}
+
+.file-box-header-right
+{
+    float: right;
+    display: flex;
+    align-items: left;
+    height: 100%;
+}
+
+.file-box-header-title
+{
+    font-size: 100%;
+    font-size: 2vh;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+.file-box-body
+{
+    background-color:#fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    display: flex;
+    margin-top: 30px;
+}
+
+.icon-button
+{
+    font-size: 48pt;
+}
+
+
+
