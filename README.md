@@ -208,6 +208,8 @@ Set an attribute called "takePhotoOutcome" to the name of an outcome to auto tri
 
 Puts an icon on the page which when clicked will push a file to the browser.
 
+![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/FileDownloader.png)
+
 Use a FileData value as the state.
 
 These attributes control the appearance: -
@@ -220,6 +222,9 @@ onClickOutcome - the name of an outcome to trigger when the file is downloaded
 #   FilePicker
 
 Puts an box on the screen where the user can click to select a local file to store into a FileData value in flow.
+
+![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/FilePicker.png)
+
 
 Image type files will be resized to 400px on longest side.
 
