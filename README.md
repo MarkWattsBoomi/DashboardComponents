@@ -1,5 +1,5 @@
 # A suite of components for acclerated UI creation
-There are components for navigation & sub menus and a simple page footer
+There are multiple components for navigation & sub menus, a simple page footer and lots of functional components
 
 #   NavigationMenu
 This is a top of page nav bar 80px high which allows the specification of an icon (top left), a title and sub title, a user avatar + name and role text and a configurable set of menu items.
@@ -127,3 +127,119 @@ in the tenant's API tool open the type endpoint /api/draw/1/element/type and pas
         ]
     }
 '''
+
+#   QRCode
+
+Uses the camera of the device to scan for QR Codes & Barcodes from live video.
+
+Uses the zxing library for image interpretation.
+
+Set the state to a string value to receive the barcode value.
+
+Set the width & height to control the display size on the page.
+
+Set an attribute called "OnDetect" to the name of an outcome to auto trigger the outcome on detection of a code.
+
+# FileData
+This structure is used by several components as the structure to pass files to and from Flow
+
+'''
+{
+        "bindings": null,
+        "developerName": "FileData",
+        "developerSummary": "",
+        "elementType": "TYPE",
+        "id": null,
+        "properties": [
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "Content",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "FileName",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "Extension",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentNumber",
+                "developerName": "Size",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "MimeType",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            }
+        ]
+'''
+
+#   Selfie
+
+Uses the camera of the device to capture a photo.
+
+Set the state to either a string value to receive the base64 dataUri or to a FileData object  (defined above) to receive a complex object.
+
+Set the width & height to control the display size on the page.
+
+Set an attribute called "takePhotoOutcome" to the name of an outcome to auto trigger when the photo is taken.
+
+#   FileDownloader
+
+Puts an icon on the page which when clicked will push a file to the browser.
+
+Use a FileData value as the state.
+
+These attributes control the appearance: -
+
+title - then title text displayed under the icon - default = "File Downloader"
+icon  - the bootstrap glyphicon to use, the short name without "glyphicon-" e.g. trash, envelope - default=envelope
+pointSize - the point size for the icon - default=24 
+onClickOutcome - the name of an outcome to trigger when the file is downloaded
+
+#   FilePicker
+
+Puts an box on the screen where the user can click to select a local file to store into a FileData value in flow.
+
+Image type files will be resized to 400px on longest side.
+
+Use a FileData value as the state.
+
+Set the width & height to control the display size on the page.
+
+These attributes control the appearance: -
+
+title - then title text displayed in the title bar - default = "Select File"
+
+#   GraphicOutcomeTile
+
+Displays a big graphical button.
+
+![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/GrahicOutcomeTile.png)
+
+
+Set these attributes: -
+title - the title at top of button
+text - the summary text below the title
+image - the url of an image to show on the tile
+tooltip - mouse hover text

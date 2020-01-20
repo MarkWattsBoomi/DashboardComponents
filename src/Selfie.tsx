@@ -1,4 +1,4 @@
-import { FlowComponent } from 'flow-component-model';
+import { eContentType, FlowComponent, FlowObjectData, FlowObjectDataProperty } from 'flow-component-model';
 import * as React from 'react';
 import './css/Selfie.css';
 
@@ -26,7 +26,29 @@ class Selfie extends FlowComponent {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
         this.imageData =  canvas.toDataURL();
-        this.setStateValue(this.imageData);
+        if (this.model.contentType.toLowerCase() === 'contentstring') {
+            await this.setStateValue(this.imageData);
+        }
+        if (this.model.contentType.toLowerCase() === 'contentobject') {
+
+            const fname: string = 'img_' + new Date().toISOString;
+            const ext: string = 'jpg';
+            const typ: string = 'image/jpeg';
+            const size: number = this.imageData.length;
+
+            // dataURL = await this.ResizeBase64Img(dataURL, 400);
+
+            const objData: FlowObjectData = FlowObjectData.newInstance('FileData');
+            objData.addProperty(FlowObjectDataProperty.newInstance('FileName', eContentType.ContentString, fname));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Extension', eContentType.ContentString, ext));
+            objData.addProperty(FlowObjectDataProperty.newInstance('MimeType', eContentType.ContentString, typ));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Size', eContentType.ContentNumber, size));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Content', eContentType.ContentString, this.imageData));
+
+            await this.setStateValue(objData);
+
+            this.forceUpdate();
+        }
 
         // is there an outcome to trigger?
         if (this.getAttribute('takePhotoOutcome', '').length > 0) {

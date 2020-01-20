@@ -1,0 +1,35 @@
+.qr-button {
+    background-color: #000000;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 10em;
+    font-size: 2em !important;
+    color: #fefefe !important;
+}
+
+.qr-title-bar {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    background-color: #000000;
+}
+.qr-title {
+    margin: auto;
+    font-family: tahoma;
+    color: #fefefe !important;
+    font-size: 3em !important;
+}
+
+.qr-result-bar {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    background-color: #000000;
+}
+
+.qr-result {
+    margin: auto;
+    font-family: tahoma;
+    color: #fefefe !important;
+    font-size: 3em !important;
+}
