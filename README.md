@@ -128,7 +128,7 @@ in the tenant's API tool open the type endpoint /api/draw/1/element/type and pas
     }
 '''
 
-#   QRCode
+# QRCodeReader
 
 Uses the camera of the device to scan for QR Codes & Barcodes from live video.
 
@@ -140,6 +140,17 @@ Set the width & height to control the display size on the page.
 
 Set an attribute called "OnDetect" to the name of an outcome to auto trigger the outcome on detection of a code.
 Set an attribute called "OnCancel" to the name of an outcome.  This will add a cancel button which will trigger the outcome.
+
+# QRCodeWriter
+
+Generates a QR code on screen from the string state value.
+
+Uses the zxing library.
+
+Set the state to a string value which provides the barcode value.
+
+Set the width & height to control the display size on the page.
+
 
 # FileData
 This structure is used by several components as the structure to pass files to and from Flow

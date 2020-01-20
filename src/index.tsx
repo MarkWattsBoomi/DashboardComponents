@@ -18,4 +18,5 @@ export * from './FlowMap';
 export * from './ActiveComboBox';
 export * from './FileDownloader';
 export * from './FilePicker';
-export * from './QRCode';
+export * from './QRCodeReader';
+export * from './QRCodeWriter';

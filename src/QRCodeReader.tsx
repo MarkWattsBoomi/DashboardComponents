@@ -1,5 +1,5 @@
-import { BrowserQRCodeReader, ITFReader, Result } from '@zxing/library';
-import { eContentType, FlowComponent, FlowObjectData, FlowObjectDataProperty } from 'flow-component-model';
+import { BrowserQRCodeReader, Result } from '@zxing/library';
+import { FlowComponent } from 'flow-component-model';
 import * as React from 'react';
 import './css/QRCode.css';
 
@@ -12,7 +12,7 @@ enum eScanStatus {
 }
 
 class QRCodeReader extends FlowComponent {
-    
+
     reader: BrowserQRCodeReader = new BrowserQRCodeReader();
     video: HTMLVideoElement;
     code: string;
@@ -39,18 +39,17 @@ class QRCodeReader extends FlowComponent {
     async componentDidMount() {
         await super.componentDidMount();
         const video = this.video;
-        
+
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            let stream = await navigator.mediaDevices.getUserMedia({video :  {facingMode: 'environment'}});
+            const stream = await navigator.mediaDevices.getUserMedia({video :  {facingMode: 'environment'}});
             video.srcObject = stream;
             await video.play();
             this.startScan();
             this.forceUpdate();
-        } 
-        else {
+        } else {
 
         }
-        
+
       }
 
     async acceptResult() {
@@ -63,12 +62,10 @@ class QRCodeReader extends FlowComponent {
     }
 
     async stopScan() {
-        if(this.scanStat !== eScanStatus.scanning)
-        {
-            console.log("not scanning - can't stop");
+        if (this.scanStat !== eScanStatus.scanning) {
+            console.log('not scanning - can\'t stop');
             this.forceUpdate();
-        }
-        else {
+        } else {
             this.reader.stopAsyncDecode();
             this.scanStat = eScanStatus.paused;
             this.forceUpdate();
@@ -76,169 +73,165 @@ class QRCodeReader extends FlowComponent {
     }
 
     async startScan() {
-    
-        if(this.scanStat === eScanStatus.scanning)
-        {
-            console.log("already scanning - can't start");
+
+        if (this.scanStat === eScanStatus.scanning) {
+            console.log('already scanning - can\'t start');
             this.forceUpdate();
-        }
-        else {
+        } else {
 
             this.scanStat = eScanStatus.scanning;
             this.forceUpdate();
-        
+
             const result: Result = await this.reader.decodeOnce(this.video);
-            
+
             this.code = result.getText();
             await this.setStateValue(this.code);
-            
-            console.log("QR=" + this.code);
+
+            console.log('QR=' + this.code);
             this.scanStat = eScanStatus.detected;
             this.forceUpdate();
 
-            //if outcome detected trigger it
-            const outcome = this.getAttribute("OnDetect","");
-            if(outcome.length> 0) {
+            // if outcome detected trigger it
+            const outcome = this.getAttribute('OnDetect', '');
+            if (outcome.length > 0) {
                 await this.triggerOutcome(outcome);
             }
         }
     }
 
-    async cancel(){
-        const outcome = this.getAttribute("OnCancel","");
-        if(outcome.length> 0) {
+    async cancel() {
+        const outcome = this.getAttribute('OnCancel', '');
+        if (outcome.length > 0) {
             await this.stopScan();
             await this.triggerOutcome(outcome);
-        } 
+        }
     }
 
     render() {
         const text: string = this.getAttribute('title', '&copy; Boomi Flow - 2019');
         let control: any;
         let message: string;
-        let buttons: any = [];
+        const buttons: any = [];
         let result: string;
 
         switch (this.scanStat) {
             case eScanStatus.init:
-                message = "Initialising";
+                message = 'Initialising';
                 break;
 
             case eScanStatus.scanning:
-                const outcome = this.getAttribute("OnCancel","");
-                let cancelAction : any;
-                if(outcome.length> 0) {
+                const outcome = this.getAttribute('OnCancel', '');
+                let cancelAction: any;
+                if (outcome.length > 0) {
                     cancelAction = this.cancel;
-                }
-                else {
+                } else {
                     cancelAction = this.stopScan;
                 }
-                message = "Scanning"
+                message = 'Scanning';
                 buttons.push(
-                    <button 
-                        className="qr-button" 
+                    <button
+                        className="qr-button"
                         onClick={cancelAction}
                     >
                         Cancel
-                    </button>
+                    </button>,
                 );
                 break;
-        
+
             case eScanStatus.paused:
-                message = "Paused";
+                message = 'Paused';
                 buttons.push(
-                    <button 
-                        className="qr-button" 
+                    <button
+                        className="qr-button"
                         onClick={this.startScan}
                     >
                         Re-Scan
-                    </button>
+                    </button>,
                 );
                 break;
 
             case eScanStatus.detected:
-                    message = "QR Code Detected";
+                    message = 'QR Code Detected';
                     buttons.push(
-                        <button 
-                            className="qr-button" 
+                        <button
+                            className="qr-button"
                             onClick={this.startScan}
                         >
                             Re-Scan
-                        </button>
+                        </button>,
                     );
-                    result = this.code
+                    result = this.code;
                     break;
         }
-        
+
         control = (
-            <div 
+            <div
                 style={{
-                    position: "absolute",
+                    position: 'absolute',
                     left: 0,
                     top: 0,
-                    height: "100%",
-                    width: "100%",
+                    height: '100%',
+                    width: '100%',
                     zIndex: 1000,
-                    display: "flex",
-                    flexDirection: "column"
+                    display: 'flex',
+                    flexDirection: 'column',
                 }}
             >
                 <div
                     className="qr-title-bar"
                 >
-                    <span 
+                    <span
                         className="qr-title"
                     >
                         {message}
-                    </span> 
+                    </span>
                 </div>
                 <div
                     className="qr-result-bar"
                 >
                     <div
                         style={{
-                            margin: "auto"
+                            margin: 'auto',
                         }}
                     >
-                        <span 
+                        <span
                         className="qr-result"
                         >
                             {result}
-                        </span> 
+                        </span>
                     </div>
-                    
+
                 </div>
                 <div
                     style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        flexGrow: 1
+                        display: 'flex',
+                        flexDirection: 'row',
+                        flexGrow: 1,
                     }}
                 >
                     <div
                         style={{
-                            margin: "auto"
+                            margin: 'auto',
                         }}
                     >
                         {buttons}
                     </div>
-                    
-                </div>             
-                
+
+                </div>
+
             </div>
         );
-        
-        
+
         return (
             <div className="barcode-scanner">
-                <video 
-                    ref={(me: any) => {this.video = me; }} 
+                <video
+                    ref={(me: any) => {this.video = me; }}
                     autoPlay={true}
                     style={{
-                        position: "absolute",
+                        position: 'absolute',
                         left: 0,
                         top: 0,
-                        width: "100%"
+                        width: '100%',
                     }}
                 />
                 {control}
@@ -251,4 +244,3 @@ class QRCodeReader extends FlowComponent {
 manywho.component.register('QRCodeReader', QRCodeReader);
 
 export default QRCodeReader;
-
