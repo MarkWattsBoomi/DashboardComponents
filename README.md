@@ -139,6 +139,7 @@ Set the state to a string value to receive the barcode value.
 Set the width & height to control the display size on the page.
 
 Set an attribute called "OnDetect" to the name of an outcome to auto trigger the outcome on detection of a code.
+Set an attribute called "OnCancel" to the name of an outcome.  This will add a cancel button which will trigger the outcome.
 
 # FileData
 This structure is used by several components as the structure to pass files to and from Flow
