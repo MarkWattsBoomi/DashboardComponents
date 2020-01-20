@@ -1,29 +1,33 @@
 import * as React from 'react';
 import './css/FilePicker.css';
 
-import {FlowComponent} from 'flow-component-model';
+import {eContentType, eLoadingState, FlowComponent, FlowObjectData, FlowObjectDataProperty} from 'flow-component-model';
+import { HTMLProps } from 'react';
 
 declare const manywho: any;
 
 class FilePicker extends FlowComponent {
     selectedItem: string = null;
-
+    imgDiv: any;
+    img: any;
     text: string = '';
     fileInput: any;
 
     constructor(props: any) {
         super(props);
-
         this.fileSelected = this.fileSelected.bind(this);
+        this.fileReadAsDataURL = this.fileReadAsDataURL.bind(this);
         this.ResizeBase64Img = this.ResizeBase64Img.bind(this);
         this.clearFile = this.clearFile.bind(this);
         this.pickFile = this.pickFile.bind(this);
-        this.getStateImage = this.getStateImage.bind(this);
+        this.isImage = this.isImage.bind(this);
+        this.rescaleImage = this.rescaleImage.bind(this);
 
     }
 
     async componentDidMount() {
         await super.componentDidMount();
+        this.forceUpdate();
     }
 
     render() {
@@ -41,22 +45,57 @@ class FilePicker extends FlowComponent {
 
         if (this.model.readOnly === false) {
             filePick = this.pickFile;
-            clearButton = (<span className="glyphicon glyphicon-remove file-box-header-button" onClick={this.clearFile}/>);
+            clearButton = (<span className="glyphicon glyphicon-remove file-picker-header-button" onClick={this.clearFile}/>);
+        }
+
+        let file: FlowObjectData;
+        let content: any;
+        if (this.loadingState === eLoadingState.ready) {
+            file = this.getStateValue() as FlowObjectData;
+
+            if (file && file.properties && file.properties.MimeType) {
+                if (this.isImage(file.properties.MimeType.value as string)) {
+                    content = (
+                        <img
+                            ref={(element: HTMLImageElement) => {this.img = element; }}
+                            className="file-picker-image"
+                            src={file.properties.Content.value as string}
+                            onLoad={this.rescaleImage}
+                        />
+                    );
+                } else {
+                    content = (
+                        <span
+                            className="file-picker-file-name"
+                        >
+                            {file.properties.FileName.value + '.' + file.properties.Extension.value}
+                        </span>
+                    );
+                }
+            }
+
         }
 
         return (
-                <div className="file-box" style={style} >
-                    <div className="file-box-header">
-                        <div className="file-box-header-left">
-                            <span className="file-box-header-title">{caption}</span>
+                <div className="file-picker"
+                    style={{width}}
+                >
+                    <div className="file-picker-header">
+                        <div className="file-picker-header-left">
+                            <span className="file-picker-header-title">{caption}</span>
                         </div>
-                        <div className="file-box-header-right">
+                        <div className="file-picker-header-right">
                             {clearButton}
                         </div>
 
                     </div>
-                    <div className="file-box-body" onClick={filePick}>
-                        <img ref="img" className="file-image" src={this.getStateImage()}/>
+                    <div
+                        className="file-picker-body"
+                        onClick={filePick}
+                        ref={(element: any) => {this.imgDiv = element; }}
+                        style={style}
+                    >
+                        {content}
                         <input
                             ref={(ele: any) => {this.fileInput = ele; }}
                             type="file"
@@ -68,8 +107,18 @@ class FilePicker extends FlowComponent {
         );
     }
 
-    getStateImage(): string {
-        return this.getStateValue() as string;
+    rescaleImage(e: any) {
+        const width: number = this.img.width;
+        const height: number = this.img.height;
+        if (width >= height) {
+            this.img.style.width = '100%';
+            this.img.style.height = 'auto';
+            this.imgDiv.style.flexDirection = 'column';
+        } else {
+            this.img.style.width = 'auto';
+            this.img.style.height = '100%';
+            this.imgDiv.style.flexDirection = 'row';
+        }
     }
 
     clearFile() {
@@ -80,46 +129,90 @@ class FilePicker extends FlowComponent {
         this.fileInput.click();
     }
 
-    fileSelected() {
-        if (this.fileInput.files && this.fileInput.files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = (e: any) => {
-                this.ResizeBase64Img(e.target.result, 400);
-                reader.onload = null;
-            };
+    isImage(mimeType: string): boolean {
+        switch (mimeType) {
+            case 'image/jpg':
+            case 'image/jpeg':
+            case 'image/bmp':
+            case 'image/gif':
+            case 'image/giff':
+            case 'image/png':
+                return true;
 
-            reader.readAsDataURL(this.fileInput.files[0]);
+            default:
+                return false;
+        }
+    }
+
+    async fileSelected(e: any) {
+        if (this.fileInput.files && this.fileInput.files.length > 0) {
+            const file: File = this.fileInput.files[0];
+            let dataURL: string = await this.fileReadAsDataURL(file);
+            const fname: string = file.name.lastIndexOf('.') >= 0 ? file.name.substring(0, file.name.lastIndexOf('.')) : file.name;
+            const ext: string = file.name.lastIndexOf('.') >= 0 ? file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase() : '';
+            const typ: string = file.type;
+            const size: number = file.size;
+
+            if (this.isImage(typ)) {
+                dataURL = await this.ResizeBase64Img(dataURL, 400);
+            }
+
+            const objData: FlowObjectData = FlowObjectData.newInstance('FileData');
+            objData.addProperty(FlowObjectDataProperty.newInstance('FileName', eContentType.ContentString, fname));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Extension', eContentType.ContentString, ext));
+            objData.addProperty(FlowObjectDataProperty.newInstance('MimeType', eContentType.ContentString, typ));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Size', eContentType.ContentNumber, size));
+            objData.addProperty(FlowObjectDataProperty.newInstance('Content', eContentType.ContentString, dataURL));
+
+            await this.setStateValue(objData);
+
+            this.forceUpdate();
 
         }
     }
 
-    ResizeBase64Img(base64: string, width: number) {
+    async fileReadAsDataURL(file: any): Promise<any> {
+        const reader = new FileReader();
+
+        return new Promise((resolve, reject) => {
+            reader.onerror = () => {
+                reader.abort();
+                reject(new DOMException('Problem reading file'));
+            };
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async ResizeBase64Img(base64: string, width: number): Promise<any> {
 
         const img = new Image();
+        return new Promise((resolve, reject) => {
+            img.onload = () => {
+                const aspectRatio = img.height / img.width;
+                const canvas = document.createElement('canvas');
 
-        img.onload = () => {
+                canvas.width = width;
+                canvas.height = width * aspectRatio;
 
-            const aspectRatio = img.height / img.width;
-            const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
 
-            canvas.width = width;
-            canvas.height = width * aspectRatio;
+                const reductionFactor = width / img.width;
+                context.scale(canvas.width / img.width , canvas.height / img.height);
 
-            const context = canvas.getContext('2d');
-
-            const reductionFactor = width / img.width;
-            context.scale(canvas.width / img.width , canvas.height / img.height);
-
-            context.drawImage(img, 0 , 0);
-            const resized = canvas.toDataURL();
-
-            this.setStateValue(resized);
-            img.src = resized;
-            img.onload = null;
-            this.forceUpdate();
-        };
-        img.src = base64;
+                context.drawImage(img, 0 , 0);
+                const resized = canvas.toDataURL();
+                resolve(resized);
+            };
+            img.onerror = () => {
+                reject(new DOMException('Problem loading image file'));
+            };
+            img.src = base64;
+        });
     }
+
 }
 
 manywho.component.register('FilePicker', FilePicker);

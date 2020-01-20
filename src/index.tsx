@@ -19,5 +19,3 @@ export * from './ActiveComboBox';
 export * from './FileDownloader';
 export * from './FileDownloaderComplex';
 export * from './FilePicker';
-export * from './TextFilePicker';
-

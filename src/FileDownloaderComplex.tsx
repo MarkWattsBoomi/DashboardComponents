@@ -17,21 +17,34 @@ class FileDownloaderComplex extends FlowComponent {
             return <div className="file-box"/>;
         }
 
-        const od: FlowObjectData = this.getStateValue() as FlowObjectData;
+        const od: FlowObjectData = (this.getStateValue() as unknown) as FlowObjectData;
 
         let fileName: string;
         let extension: string;
         let size: number = 0;
         let mimeType: string;
-        let dataUri: string = 'data:binary/octet-stream;base64,';
+        let base64: string;
+
+        // = 'data:binary/octet-stream;base64,';
 
         if (od) {
             fileName = od.properties.FileName.value as string;
             extension = od.properties.Extension.value as string;
             size = od.properties.Size.value as number;
             mimeType = od.properties.MimeType.value as string;
-            dataUri += od.properties.Content.value as string;
+            base64 = (od.properties.Content.value as string).split(',')[1];
         }
+
+        const byteString = atob(base64);
+
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], {type: mimeType});
+
+        const objectURL = URL.createObjectURL(blob);
 
         const caption: string = this.getAttribute('title', 'File Downloader');
         const icon: string = this.getAttribute('icon', 'envelope');
@@ -40,12 +53,14 @@ class FileDownloaderComplex extends FlowComponent {
         const iconStyle: React.CSSProperties = { fontSize: iconSize + 'pt' };
         const outcome: string = this.getAttribute('onClickOutcome', '');
 
+        const download = fileName + (extension.length > 0 ? '.' + extension : '');
+
         return (
         <div className="file-box"  >
             <div className="file-box-body">
                 <a
-                    download={fileName + '.' + extension}
-                    href={dataUri}
+                    download={download}
+                    href={objectURL}
                     onClick={async (e: any) => {if (outcome.length > 0) {await this.triggerOutcome(outcome); }}}
                 >
                     <span className={className} style={iconStyle} title={caption}/>
