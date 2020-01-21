@@ -53,31 +53,14 @@ export class IconProgressBar extends FlowComponent {
                 cls = 'glyphicon glyphicon-' + d.icon + ' icon-progress-bar-icon ';
 
                 const style: any = {};
-
-                if (this.getAttribute('IconSize')) {
-                    style['font-size'] = this.getAttribute('IconSize') + 'pt';
-                }
+                style['font-size'] = this.getAttribute('iconPointSize', '20') + 'pt';
 
                 if (parseInt(d.key) < status) {
-                    if (this.getAttribute('CompleteColour')) {
-                        style.color = this.getAttribute('CompleteColour');
-                    } else {
-                        cls += ' icon-progress-bar-icon-complete';
-                    }
+                    style.color = this.getAttribute('completeColour', '#3797ff');
                 } else if (parseInt(d.key) === status) {
-                    if (this.getAttribute('ActiveColour')) {
-                        style.color = this.getAttribute('ActiveColour');
-                    } else {
-                        cls += ' icon-progress-bar-icon-active';
-                    }
-
+                    style.color = this.getAttribute('activeColour', '#fefefe');
                 } else {
-                    if (this.getAttribute('IncompleteColour')) {
-                        style.color = this.getAttribute('IncompleteColour');
-                    } else {
-                        cls += ' icon-progress-bar-icon-incomplete';
-                    }
-
+                   style.color = this.getAttribute('incompleteColour', '#bbbbb');
                 }
                 const span = (
                     <span

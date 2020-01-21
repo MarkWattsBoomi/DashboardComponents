@@ -279,3 +279,32 @@ Set these attributes: -
 * iconColour - the colour string for the icon e.g. "red", "#333333" or rgb(255,255,255)
 * tooltip - mouse hover text
 
+# IconProgressBar
+
+Displays a row of icons showing progress through stages
+
+You configure the icons and how they relate to a numeric progress field.
+
+The value of the state field is compared to the key values in the icon array.  
+Those of a lower value are complete, equal is active and higher are incomplete
+
+Set the model to a list of 'IconProgressItem' containing the various icons
+Set the state value to a field containing an number showing current progress
+
+Set these attributes: -
+* iconPointSize - the title at top of popup
+* incompleteColour - the colour string for the icon when incomplete e.g. "red", "#333333" or rgb(255,255,255)
+* activeColour - the colour string for the icon when active e.g. "red", "#333333" or rgb(255,255,255)
+* completeColour - the colour string for the icon when complete e.g. "red", "#333333" or rgb(255,255,255)
+
+
+# IconProgressItem
+
+This type is used for holding the icons for the IconProgressBar
+
+![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/iconprogressbar.png)
+
+
+* key - number, the value to evaluate against the current progress in the state
+* tooltip - string, the text to show when howering
+* icon - string, the short name of a glyph icon to display.
