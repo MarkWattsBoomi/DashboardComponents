@@ -311,7 +311,8 @@ This type is used for holding the icons for the IconProgressBar
 
 use this JSON
 
-'{
+`
+{
         "bindings": null,
         "developerName": "IconProgressItem",
         "developerSummary": "",
@@ -346,3 +347,4 @@ use this JSON
         "serviceElementDeveloperName": null,
         "serviceElementId": null,
     }
+`
