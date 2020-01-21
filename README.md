@@ -268,11 +268,11 @@ Displays an icon button which when clicked pops up a modal dialog showing a Cont
 
 Set the state to a Flow content field containing the message to show in popup box
 
-Set these attributes: -
-title - the title at top of popup
-closeButtonLabel - the text on the modal close button
-icon - the short name of a glyphicon to display on the page
-iconPointSize - the point size of the icon
-iconColour - the colour string for the icon e.g. "red", "#333333" or rgb(255,255,255)
-tooltip - mouse hover text
+* Set these attributes: -
+* title - the title at top of popup
+* closeButtonLabel - the text on the modal close button
+* icon - the short name of a glyphicon to display on the page
+* iconPointSize - the point size of the icon
+* iconColour - the colour string for the icon e.g. "red", "#333333" or rgb(255,255,255)
+* tooltip - mouse hover text
 
