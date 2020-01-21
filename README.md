@@ -283,6 +283,8 @@ Set these attributes: -
 
 Displays a row of icons showing progress through stages
 
+![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/iconprogressbar.png)
+
 You configure the icons and how they relate to a numeric progress field.
 
 The value of the state field is compared to the key values in the icon array.  
@@ -301,8 +303,6 @@ Set these attributes: -
 # IconProgressItem
 
 This type is used for holding the icons for the IconProgressBar
-
-![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/iconprogressbar.png)
 
 
 * key - number, the value to evaluate against the current progress in the state
