@@ -20,3 +20,4 @@ export * from './FileDownloader';
 export * from './FilePicker';
 export * from './QRCodeReader';
 export * from './QRCodeWriter';
+export * from './PopupInfo';
