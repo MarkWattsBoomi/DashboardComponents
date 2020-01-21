@@ -260,3 +260,19 @@ title - the title at top of button
 text - the summary text below the title
 image - the url of an image to show on the tile
 tooltip - mouse hover text
+
+
+#   PopupInfo
+
+Displays an icon button which when clicked pops up a modal dialog showing a Content value from Flow..
+
+Set the state to a Flow content field containing the message to show in popup box
+
+Set these attributes: -
+title - the title at top of popup
+closeButtonLabel - the text on the modal close button
+icon - the short name of a glyphicon to display on the page
+iconPointSize - the point size of the icon
+iconColour - the colour string for the icon e.g. "red", "#333333" or rgb(255,255,255)
+tooltip - mouse hover text
+

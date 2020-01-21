@@ -28,8 +28,8 @@ class PopupInfo extends FlowComponent {
 
     showPopup() {
 
-        const popupTitle: string = this.getAttribute('PopupTitle') || '';
-        const popupCancel: string = this.getAttribute('PopupCancelButton') || 'Close';
+        const popupTitle: string = this.getAttribute('title') || '';
+        const popupCancel: string = this.getAttribute('closeButtonLabel') || 'Close';
         const messageContent: string = this.getStateValue() as string;
 
         const content: any = [];
@@ -65,10 +65,10 @@ class PopupInfo extends FlowComponent {
 
     render() {
 
-        const icon: string = this.getAttribute('Icon') || 'wrench';
-        const iconPointSize: number = parseInt(this.getAttribute('IconFontSizePoints') || '18');
-        const iconTooltip: string = this.getAttribute('IconTooltip') || 'Click';
-        const iconColour: string = this.getAttribute('IconColour') || '#000000';
+        const icon: string = this.getAttribute('icon') || 'wrench';
+        const iconPointSize: number = parseInt(this.getAttribute('iconPointSize') || '18');
+        const iconTooltip: string = this.getAttribute('tooltip') || 'Click';
+        const iconColour: string = this.getAttribute('iconColour') || '#000000';
 
         let popup: any;
         if (this.dialogVisible) {
