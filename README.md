@@ -308,3 +308,41 @@ This type is used for holding the icons for the IconProgressBar
 * key - number, the value to evaluate against the current progress in the state
 * tooltip - string, the text to show when howering
 * icon - string, the short name of a glyph icon to display.
+
+use this JSON
+
+'{
+        "bindings": null,
+        "developerName": "IconProgressItem",
+        "developerSummary": "",
+        "elementType": "TYPE",
+        "id": null,
+        "properties": [
+            {
+                "contentFormat": "",
+                "contentType": "ContentNumber",
+                "developerName": "key",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "tooltip",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            },
+            {
+                "contentFormat": "",
+                "contentType": "ContentString",
+                "developerName": "icon",
+                "id": null,
+                "typeElementDeveloperName": null,
+                "typeElementId": null
+            }
+        ],
+        "serviceElementDeveloperName": null,
+        "serviceElementId": null,
+    }

@@ -37,7 +37,6 @@ export class IconProgressBar extends FlowComponent {
                     const icon: any = {};
                     icon.key = item.properties['key'].value;
                     icon.tooltip = item.properties['tooltip'].value;
-                    icon.name = item.properties['name'].value;
                     icon.icon = item.properties['icon'].value;
                     data.push(icon);
                 });
