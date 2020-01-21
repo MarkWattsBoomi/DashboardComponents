@@ -20,22 +20,6 @@ Each one can be a NAVIGATE, FUNCTION, OPEN, OUTCOME or MENU
 * MENU allows specifying the name of a list (int the value field) which contains other MenuItems to form a child dropdown menu.
 
 
-The exact function of each menu item is defined in the pre-requisite MenuItem type: -
-
-'
-MenuItem{
-    label       string  the display text for the item, the caption
-    value       string  the value used when this menu item is triggered e.g. the name of the outcome to trigger 
-                        or the Uri to open in a new tab etc.  Can be surrounded with double braces {{xx.yy.zz}} to do value lookup.
-    icon        string  the bootstrap glyphicon to display, just the short name without the "glyphicon-" part e.g. envelope or wrench.  
-                        if not specifed then it shows the label, this controls if it's an icon or text menu item
-    type        string  the action type NAVIGATE, OPEN, OUTCOME, MENU, FUNCTION
-    name        string  the internal name of the menu, not really used
-    order       number  the display order or position from 1-99 allowing you to define the order the menu items are shown
-    subItems    list    a list of child MenuItem objects to use for nested dropdown.
-}
-'
-
 So create the MenuItem type and then a list of them and set the values - the type definition is shown below to be created via the API.
 
 Drop a component on your page, change its componentType to NavigationMenu, set its DataSource to your MenuItem list.
@@ -74,10 +58,23 @@ Set these attributes: -
 
 # Menu Item
 
+The exact function of each menu item is defined in the pre-requisite MenuItem type: -
+
+* label       string  the display text for the item, the caption
+* value       string  the value used when this menu item is triggered e.g. the name of the outcome to trigger 
+                    or the Uri to open in a new tab etc.  Can be surrounded with double braces {{xx.yy.zz}} to do value lookup.
+* icon        string  the bootstrap glyphicon to display, just the short name without the "glyphicon-" part e.g. envelope or wrench.  
+                    if not specifed then it shows the label, this controls if it's an icon or text menu item
+* type        string  the action type NAVIGATE, OPEN, OUTCOME, MENU, FUNCTION
+* name        string  the internal name of the menu, not really used
+* * order       number  the display order or position from 1-99 allowing you to define the order the menu items are shown
+subItems    list    a list of child MenuItem objects to use for nested dropdown.
+
+
 in the tenant's API tool open the type endpoint /api/draw/1/element/type and paste thie following JSON then POST it.
 
 
-'
+```
 {
         "developerName": "MenuItem",
         "developerSummary": "A Menu Item",
@@ -127,7 +124,7 @@ in the tenant's API tool open the type endpoint /api/draw/1/element/type and pas
             }
         ]
     }
-'
+```
 
 # QRCodeReader
 
@@ -157,7 +154,7 @@ Set the width & height to control the display size on the page.
 # FileData
 This structure is used by several components as the structure to pass files to and from Flow
 
-'
+```
 {
     "bindings": null,
     "developerName": "FileData",
@@ -207,7 +204,7 @@ This structure is used by several components as the structure to pass files to a
         }
     ]
 }
-'
+```
 
 #   Selfie
 
@@ -218,6 +215,7 @@ Set the state to either a string value to receive the base64 dataUri or to a Fil
 Set the width & height to control the display size on the page.
 
 Set an attribute called "takePhotoOutcome" to the name of an outcome to auto trigger when the photo is taken.
+
 
 #   FileDownloader
 
