@@ -229,6 +229,7 @@ These attributes control the appearance: -
 
 * title - then title text displayed under the icon - default = "File Downloader"
 * icon  - the bootstrap glyphicon to use, the short name without "glyphicon-" e.g. trash, envelope - default=envelope
+* iconColour  - the color for the icon e.g. "blue", "#fefefe", "rgb(10,10,1)" - befault #666
 * pointSize - the point size for the icon - default=24 
 * onClickOutcome - the name of an outcome to trigger when the file is downloaded
 

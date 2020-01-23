@@ -63,6 +63,12 @@
 .icon-button
 {
     font-size: 48pt;
+    cursor: pointer;
+}
+
+.icon-button:hover
+{
+    color: blue;
 }
 
 
