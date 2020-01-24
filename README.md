@@ -240,15 +240,28 @@ Puts an box on the screen where the user can click to select a local file to sto
 ![alt text](https://files-manywho-com.s3.amazonaws.com/bf9c8481-0fbe-4240-941d-8d928744ba4d/FilePicker.png)
 
 
-Image type files will be resized to 400px on longest side.
+Image type files will be resized to imageSize attribute on longest side.
 
-Use a FileData value as the state.
+Use a FileData value or a simple String as the state, if a String then the dataUri must be in the field.
 
 Set the width & height to control the display size on the page.
 
 These attributes control the appearance: -
 
 * title - then title text displayed in the title bar - default = "Select File"
+* imageSize - the max dimension for the image in pixels - only applies to images - default 0 does not reduce image. e.g. 400
+
+
+#   ImageDisplay
+
+Puts an box on the screen where you can simply display an image from flow values.
+
+
+Use a FileData value as the state.
+
+Set the width & height to control the display size on the page.
+
+
 
 #   GraphicOutcomeTile
 

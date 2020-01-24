@@ -1,6 +1,7 @@
 import { eLoadingState, eSortOrder, FlowObjectDataArray, FlowPage } from 'flow-component-model';
+
 import * as React from 'react';
-import { calculateValue } from './common-functions';
+// import { calculateValue } from './common-functions';
 import './css/Common.css';
 import './css/NavigationMenu.css';
 import { NavigationMenuItem } from './NavigationMenuItem';
@@ -18,6 +19,7 @@ export class NavigationMenu extends FlowPage {
         this.openOutcome = this.openOutcome.bind(this);
         this.closeApplication = this.closeApplication.bind(this);
         this.executeFunction = this.executeFunction.bind(this);
+        this.move = this.move.bind(this);
     }
 
     async componentDidMount() {
@@ -31,11 +33,11 @@ export class NavigationMenu extends FlowPage {
             // the datasource tells us the name of the menu items array
 
             const menuItems: FlowObjectDataArray = this.model.dataSource;
-            const logo: string = calculateValue(this, this.getAttribute('logo', ''));
-            const title: string = calculateValue(this, this.getAttribute('title', ''));
-            const hideUserAnonymous: boolean = calculateValue(this, this.getAttribute('hide-user-anonymous', 'false')).toLowerCase() === 'true' ? true : false;
-            const hideUser: boolean = calculateValue(this, this.getAttribute('hide-user', 'false')).toLowerCase() === 'true' ? true : false;
-            const hideUserText: boolean = calculateValue(this, this.getAttribute('hide-user-text', 'false')).toLowerCase() === 'true' ? true : false;
+            const logo: string = this.calculateValue(this.getAttribute('logo', ''));
+            const title: string = this.calculateValue(this.getAttribute('title', ''));
+            const hideUserAnonymous: boolean = this.calculateValue(this.getAttribute('hide-user-anonymous', 'false')).toLowerCase() === 'true' ? true : false;
+            const hideUser: boolean = this.calculateValue(this.getAttribute('hide-user', 'false')).toLowerCase() === 'true' ? true : false;
+            const hideUserText: boolean = this.calculateValue(this.getAttribute('hide-user-text', 'false')).toLowerCase() === 'true' ? true : false;
             const subTitle: string = ''; // this.getAttribute('sub-title', '');
 
             const userName: string = this.user.firstName + ' ' + this.user.lastName;
@@ -132,6 +134,35 @@ export class NavigationMenu extends FlowPage {
 
     async openOutcome(outcome: string) {
         await this.triggerOutcome(outcome);
+    }
+
+    async move(targetElement: string) {
+        console.log('move to : ' + targetElement);
+
+        const baseUrl = manywho.settings.global('platform.uri') || window.location.origin || 'https://flow.manywho.com';
+        const invokeurl = `${baseUrl}/api/run/1/state/${this.stateId}`;
+
+        const info = manywho.state.getState(this.flowKey);
+         ///  api/run/1/state/{stateId}
+        const request: any = {};
+        request.currentMapElementId = info.currentMapElementId;
+        request.invokeType = 'NAVIGATE';
+        request.mapElementInvokeRequest = {};
+        request.mapElementInvokeRequest.selectedOutcomeId = null;
+        request.pageRequest = {
+            pageComponentInputResponses: [
+              { pageComponentId: this.componentId, contentValue: null, objectData: null},
+            ],
+        };
+        request.selectedMapElementId = targetElement; // '63573014-69a5-490c-a988-57809e4bf3f0';
+        request.stateId = this.stateId;
+        request.stateToken = info.token;
+
+        await manywho.connection.request(this, null, invokeurl , 'POST', this.tenantId, this.stateId, manywho.state.getAuthenticationToken(this.flowKey), request);
+        // await manywho.engine.sync(this.flowKey);
+        // manywho.engine.ping(this.flowKey);
+
+        return Promise.resolve();
     }
 
     executeFunction(operation: string) {

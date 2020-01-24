@@ -48,18 +48,28 @@ class FilePicker extends FlowComponent {
             clearButton = (<span className="glyphicon glyphicon-remove file-picker-header-button" onClick={this.clearFile}/>);
         }
 
-        let file: FlowObjectData;
+        let file: any;
+        let mimeType: string;
+        let fileContent: string;
         let content: any;
         if (this.loadingState === eLoadingState.ready) {
             file = this.getStateValue() as FlowObjectData;
 
-            if (file && file.properties && file.properties.MimeType) {
-                if (this.isImage(file.properties.MimeType.value as string)) {
+            if (file) {
+                if (this.model.contentType === 'ContentString') {
+                    mimeType = file.substring(file.indexOf(':') + 1, file.indexOf(';'));
+                    fileContent = file;
+                } else {
+                    // assume object
+                    mimeType = file.properties.MimeType.value;
+                    fileContent = file.properties.Content.value as string;
+                }
+                if (this.isImage(mimeType)) {
                     content = (
                         <img
                             ref={(element: HTMLImageElement) => {this.img = element; }}
                             className="file-picker-image"
-                            src={file.properties.Content.value as string}
+                            src={fileContent}
                             onLoad={this.rescaleImage}
                         />
                     );
@@ -153,16 +163,23 @@ class FilePicker extends FlowComponent {
             const typ: string = file.type;
             const size: number = file.size;
 
-            if (this.isImage(typ)) {
-                dataURL = await this.ResizeBase64Img(dataURL, 400);
+            if (this.isImage(typ) && parseInt(this.getAttribute('imageSize', '0')) > 0) {
+                dataURL = await this.ResizeBase64Img(dataURL, parseInt(this.getAttribute('imageSize', '0')));
             }
 
-            const objData: FlowObjectData = FlowObjectData.newInstance('FileData');
-            objData.addProperty(FlowObjectDataProperty.newInstance('FileName', eContentType.ContentString, fname));
-            objData.addProperty(FlowObjectDataProperty.newInstance('Extension', eContentType.ContentString, ext));
-            objData.addProperty(FlowObjectDataProperty.newInstance('MimeType', eContentType.ContentString, typ));
-            objData.addProperty(FlowObjectDataProperty.newInstance('Size', eContentType.ContentNumber, size));
-            objData.addProperty(FlowObjectDataProperty.newInstance('Content', eContentType.ContentString, dataURL));
+            let objData: any;
+
+            if (this.model.contentType === 'ContentString') {
+                objData = dataURL;
+            } else {
+                // assume object
+                objData = FlowObjectData.newInstance('FileData');
+                objData.addProperty(FlowObjectDataProperty.newInstance('FileName', eContentType.ContentString, fname));
+                objData.addProperty(FlowObjectDataProperty.newInstance('Extension', eContentType.ContentString, ext));
+                objData.addProperty(FlowObjectDataProperty.newInstance('MimeType', eContentType.ContentString, typ));
+                objData.addProperty(FlowObjectDataProperty.newInstance('Size', eContentType.ContentNumber, size));
+                objData.addProperty(FlowObjectDataProperty.newInstance('Content', eContentType.ContentString, dataURL));
+            }
 
             await this.setStateValue(objData);
 

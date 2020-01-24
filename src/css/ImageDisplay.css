@@ -1,0 +1,7 @@
+.image-display
+{
+    border: 2px solid black;
+    display: flex;
+    position: relative;
+    box-sizing: content-box;
+}

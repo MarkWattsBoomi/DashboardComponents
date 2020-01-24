@@ -64,6 +64,10 @@ export class NavigationMenuItem extends React.Component<any, any> {
                 }
                 break;
 
+            case 'MOVE':
+                action = this.props.parent.move;
+                break;
+
         }
 
         // prep any shown menus
@@ -123,6 +127,7 @@ export class NavigationMenuItem extends React.Component<any, any> {
 
             case 'OUTCOME':
             case 'FUNCTION':
+            case 'MOVE':
                     if (this.props.menuItem.properties.icon.value && this.props.menuItem.properties.icon.value.length > 0) {
                         if ((this.props.menuItem.properties.icon.value as string).startsWith('http')) {
                             // it's an absolute image url
