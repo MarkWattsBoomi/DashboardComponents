@@ -120,6 +120,8 @@ class FilePicker extends FlowComponent {
     rescaleImage(e: any) {
         const width: number = this.img.width;
         const height: number = this.img.height;
+
+        // need to check on IE compatibility here - i think aspect ration is wrong in IE
         if (width >= height) {
             this.img.style.width = '100%';
             this.img.style.height = 'auto';

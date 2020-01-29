@@ -1,4 +1,4 @@
-
+import 'core-js/stable';
 import { eLoadingState, FlowComponent, FlowObjectData } from 'flow-component-model';
 import * as React from 'react';
 import './css/FileDownloader.css';
