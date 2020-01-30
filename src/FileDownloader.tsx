@@ -1,6 +1,7 @@
 import 'core-js/stable';
 import { eLoadingState, FlowComponent, FlowObjectData } from 'flow-component-model';
 import * as React from 'react';
+import { Base64 } from './Base64';
 import './css/FileDownloader.css';
 
 declare const manywho: any;
@@ -41,7 +42,9 @@ class FileDownloader extends FlowComponent {
             base64 = (od.properties.Content.value as string).split(',')[1];
         }
 
-        const byteString = atob(base64);
+        // const byteString = Base64.encode(base64);
+        // const byteString = atob(base64);
+        const byteString = Base64.decode(base64);
 
         const ab = new ArrayBuffer(byteString.length);
         const ia = new Uint8Array(ab);
@@ -65,6 +68,7 @@ class FileDownloader extends FlowComponent {
             // this.anchor.click();
 
         }
+
         const outcome: string = this.getAttribute('onClickOutcome', '');
         if (outcome.length > 0) {
             await this.triggerOutcome(outcome);
