@@ -21,8 +21,8 @@ class QRCodeWriter extends FlowComponent {
         // const text: string = this.getAttribute('title', '&copy; Boomi Flow - 2019');
 
         const content: string = this.getStateValue() as string;
-        const width: number = this.model.width | 300;
-        const height: number = this.model.height | 300;
+        const width: number = this.model.width || 300;
+        const height: number = this.model.height || 300;
         const svgElement: any = this.writer.write(content, width, height);
 
         return (
