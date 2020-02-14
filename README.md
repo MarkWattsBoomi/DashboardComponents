@@ -250,7 +250,7 @@ These attributes control the appearance: -
 
 * title - then title text displayed in the title bar - default = "Select File"
 * imageSize - the max dimension for the image in pixels - only applies to images - default 0 does not reduce image. e.g. 400
-
+* onSelected - the name of an outcome to trigger when a file has been selected and read.  optional,
 
 #   ImageDisplay
 

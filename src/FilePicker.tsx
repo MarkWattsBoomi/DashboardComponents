@@ -138,6 +138,7 @@ class FilePicker extends FlowComponent {
     }
 
     pickFile() {
+        this.fileInput.value = '';
         this.fileInput.click();
     }
 
@@ -184,6 +185,10 @@ class FilePicker extends FlowComponent {
             }
 
             await this.setStateValue(objData);
+
+            if (this.getAttribute('onSelected', '').length > 0) {
+                await this.triggerOutcome(this.getAttribute('onSelected', ''));
+            }
 
             this.forceUpdate();
 
