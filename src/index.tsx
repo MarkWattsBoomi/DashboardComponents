@@ -1,4 +1,4 @@
-/*
+
 export * from './IconProgressBar';
 export * from './InfoCell';
 export * from './InfoDisc';
@@ -27,5 +27,4 @@ export * from './PopupInfo';
 export * from './ImageDisplay';
 export * from './GoogleChart';
 export * from './Breadcrumbs/Breadcrumbs';
-*/
 export * from './HierarchyCrumbs/HierarchyCrumbs';
