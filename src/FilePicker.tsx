@@ -67,6 +67,12 @@ class FilePicker extends FlowComponent {
                 if (this.isImage(mimeType)) {
                     content = (
                         <img
+                            style={{
+                                maxHeight: '100%',
+                                maxWidth: '100%',
+                                width: 'auto',
+                                height: 'auto',
+                            }}
                             ref={(element: HTMLImageElement) => {this.img = element; }}
                             className="file-picker-image"
                             src={fileContent}
@@ -123,13 +129,13 @@ class FilePicker extends FlowComponent {
 
         // need to check on IE compatibility here - i think aspect ration is wrong in IE
         if (width >= height) {
-            this.img.style.width = '100%';
-            this.img.style.height = 'auto';
-            this.imgDiv.style.flexDirection = 'column';
+            // this.img.style.width = '100%';
+            // this.img.style.height = 'auto';
+            // this.imgDiv.style.flexDirection = 'column';
         } else {
-            this.img.style.width = 'auto';
-            this.img.style.height = '100%';
-            this.imgDiv.style.flexDirection = 'row';
+            // this.img.style.width = 'auto';
+            // this.img.style.height = '100%';
+            // this.imgDiv.style.flexDirection = 'row';
         }
     }
 
