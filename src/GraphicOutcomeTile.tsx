@@ -19,11 +19,23 @@ class GraphicOutcomeTile extends FlowComponent {
     }
 
     render() {
+        let label: string;
+        let text: string;
+        let image: string;
+        let tooltip: string;
 
-        const label: string = this.getAttribute('title', 'Add title attribute');
-        const text: string = this.getAttribute('text', 'Add text attribute');
-        const image: string = this.getAttribute('image', 'add image attribute');
-        const tooltip: string = this.getAttribute('tooltip', label);
+        if (this.props.inCarousel !== true) {
+            label = this.getAttribute('title', 'Add title attribute');
+            text = this.getAttribute('text', 'Add text attribute');
+            image = this.getAttribute('image', 'add image attribute');
+            tooltip = this.getAttribute('tooltip', label);
+        } else {
+            label = this.props.title;
+            text = this.props.description;
+            image = this.props.image;
+            tooltip = label;
+        }
+
         return (
             <div
                 className="graphic-outcome-tile"

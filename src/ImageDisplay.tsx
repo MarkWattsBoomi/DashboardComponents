@@ -45,7 +45,12 @@ class ImageDisplay extends FlowComponent {
 
             if (file) {
                 if (this.model.contentType === 'ContentString') {
-                    mimeType = file.substring(file.indexOf(':') + 1, file.indexOf(';'));
+                    // could be a url
+                    if ((file as string).startsWith('http')) {
+                        mimeType = (file as string).substring((file as string).lastIndexOf('.') + 1);
+                    } else {
+                        mimeType = file.substring(file.indexOf(':') + 1, file.indexOf(';'));
+                    }
                     fileContent = file;
                 } else {
                     // assume object
@@ -100,6 +105,12 @@ class ImageDisplay extends FlowComponent {
     isImage(mimeType: string): boolean {
         switch (mimeType) {
             case 'image/jpg':
+            case 'jpg':
+            case 'jpeg':
+            case 'gif':
+            case 'giff':
+            case 'bmp':
+            case 'png':
             case 'image/jpeg':
             case 'image/bmp':
             case 'image/gif':
