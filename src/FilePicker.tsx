@@ -71,7 +71,7 @@ class FilePicker extends FlowComponent {
                                 maxHeight: '100%',
                                 maxWidth: '100%',
                                 width: 'auto',
-                                height: 'auto',
+                                OObjectFit: 'cover',
                             }}
                             ref={(element: HTMLImageElement) => {this.img = element; }}
                             className="file-picker-image"
@@ -172,8 +172,12 @@ class FilePicker extends FlowComponent {
             const typ: string = file.type;
             const size: number = file.size;
 
-            if (this.isImage(typ) && parseInt(this.getAttribute('imageSize', '0')) > 0) {
-                dataURL = await this.ResizeBase64Img(dataURL, parseInt(this.getAttribute('imageSize', '0')));
+            if (this.isImage(typ)) {
+                let imgSize: number = 200;
+                if (parseInt(this.getAttribute('imageSize', '0')) > 0) {
+                    imgSize = parseInt(this.getAttribute('imageSize', '0'));
+                }
+                dataURL = await this.ResizeBase64Img(dataURL, imgSize);
             }
 
             let objData: any;
