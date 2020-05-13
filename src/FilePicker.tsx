@@ -34,8 +34,8 @@ class FilePicker extends FlowComponent {
 
         let filePick: any;
         const caption: string = this.getAttribute('title') || 'Select File';
-        const width = (this.model.width > 99 ? this.model.width : 100) + 'px';
-        const height = (this.model.height > 99 ? this.model.height : 100)  + 'px';
+        const width = (this.model.width > 99 ? this.model.width + 'px' : '100%');
+        const height = (this.model.height > 99 ? this.model.height + 'px' : '100%');
 
         const style: any = {};
         style.width = width;

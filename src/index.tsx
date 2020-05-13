@@ -28,3 +28,4 @@ export * from './ImageDisplay';
 export * from './GoogleChart';
 export * from './Breadcrumbs/Breadcrumbs';
 export * from './HierarchyCrumbs/HierarchyCrumbs';
+export * from './PDVViewer/PDFViewer';

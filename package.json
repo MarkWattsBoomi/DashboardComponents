@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/google-maps-react": "^2.0.1",
     "@types/jquery": "^3.3.29",
+    "@types/react-pdf": "^4.0.3",
     "@zxing/library": "^0.15.2",
     "acorn": "^6.4.1",
     "core-js": "^3.6.4",
@@ -25,7 +26,8 @@
     "quagga": "^0.12.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-google-charts": "^2.0.29"
+    "react-google-charts": "^2.0.29",
+    "react-pdf": "^4.1.0"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.11",

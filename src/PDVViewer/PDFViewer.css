@@ -1,0 +1,68 @@
+.pdfv {
+    display:flex;
+    flex-direction: column;
+    border: 3px solid #74a0dc;
+    border-radius: 3px;
+}
+
+.pdfv-header {
+    display:flex;
+    flex-direction: row;
+    flex-grow: 0;
+    background-color: #74a0dc;
+    cursor: pointer;
+}
+
+.pdfv-header-title {
+    color: #fefefe;
+    font-size: 16px;
+    margin: auto;
+}
+
+.pdfv-nav {
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc;
+}
+
+.pdfv-nav-floater {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.pdfv-nav-button {
+    font-size: 20px;
+    margin: auto;
+    cursor: pointer;
+    color: #111;
+    top: 0 !important;
+}
+
+.pdfv-nav-label {
+    font-size: 18px;
+    color: #111;
+}
+
+.pdfv-body {
+    display:flex;
+    flex-direction: row;
+    flex-grow: 1;
+    padding: 5px
+}
+
+.pdfv-body {
+    overflow: scroll;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.pdfv-body-scroller {
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow: visible;
+}
