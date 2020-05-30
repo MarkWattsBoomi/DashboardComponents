@@ -29,3 +29,4 @@ export * from './GoogleChart';
 export * from './Breadcrumbs/Breadcrumbs';
 export * from './HierarchyCrumbs/HierarchyCrumbs';
 export * from './PDVViewer/PDFViewer';
+export * from './SectionRepeater/SectionRepeater';

@@ -1,0 +1,53 @@
+.srep {
+
+}
+
+.srep-item {
+    border: 2px solid #4866ca;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.srep-header {
+    background-color: #4866ca;
+    display: flex;
+    flex-direction: row;
+}
+
+.srep-header-date {
+    color: #fefefe;
+    margin: auto;
+    margin-left: 5px;
+    margin-right: 20px;
+    flex-grow: 0;
+    font-size: 18px;
+}
+
+.srep-header-approver {
+    color: #fefefe;
+    margin: auto;
+    margin-right: 20px;
+    flex-grow: 1;
+    font-size: 18px;
+}
+
+.srep-header-result {
+    font-size: 20px;
+    top: -1px !important;
+    margin: auto;
+    padding: 5px;
+    flex-grow: 0;
+}
+
+.srep-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.srep-comment {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
