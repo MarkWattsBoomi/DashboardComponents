@@ -275,6 +275,7 @@ Set these attributes: -
 * text - the summary text below the title
 * image - the url of an image to show on the tile
 * tooltip - mouse hover text
+* outcome - the name of an outcome to trigger when the tile is clicked
 
 
 #   PopupInfo
