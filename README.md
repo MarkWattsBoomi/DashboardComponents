@@ -1,6 +1,13 @@
 # A suite of components for acclerated UI creation
 There are multiple components for navigation & sub menus, a simple page footer and lots of functional components
 
+The latest version can be included in your player from this location: -
+
+```
+https://files-manywho-com.s3.amazonaws.com/e1dbcceb-070c-4ce6-95b0-ba282aaf4f48/dashboard-components.js
+https://files-manywho-com.s3.amazonaws.com/e1dbcceb-070c-4ce6-95b0-ba282aaf4f48/dashboard-components.css
+```
+
 #   NavigationMenu
 This is a top of page nav bar 80px high which allows the specification of an icon (top left), a title and sub title, a user avatar + name and role text and a configurable set of menu items.
 
