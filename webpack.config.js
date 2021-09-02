@@ -1,68 +1,58 @@
-const path = require('path');
-const fs = require('fs');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WriteFilePlugin = require('write-file-webpack-plugin');
-const flow = require('./package.json').flow;
-
+const path = require('path')
+const fs = require('fs')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const flow = require('./package.json').flow
 module.exports = function() {
     const config = {
-        entry: "./src/index.tsx",
+        entry: './src/index.tsx',
         output: {
             filename: flow.filenames.js,
-            path: path.resolve(__dirname, 'build')
+            path: path.resolve(__dirname, 'build'),
+            sourceMapFilename: '[flow.filenames.js].map',
         },
         devtool: 'inline-source-map',
         resolve: {
-            extensions: [".ts", ".tsx", ".js", ".json"],
+            extensions: ['.ts', '.tsx', '.js', '.json'],
         },
         devServer: {
-            contentBase: './build'
+            static: {
+                directory: './build'
+            },
+            devMiddleware: {
+                writeToDisk: true
+            }
         },
         mode: 'development',
         module: {
             rules: [
-                {
-                    test: /\.tsx?$/,
-                    enforce: 'pre',
-                    use: [
-                        {
-                            loader: 'tslint-loader',
-                            options: {
-                                fix: true
-                            }
-                        }
-                    ]
+                { 
+                    test: /.tsx?$/, 
+                    loader: 'ts-loader'
                 },
                 { 
-                    test: /\.tsx?$/, 
-                    loader: "awesome-typescript-loader" 
+                    test: /.js$/, 
+                    enforce: 'pre', 
+                    loader: 'source-map-loader'
                 },
                 { 
-                    test: /\.js$/, 
-                    enforce: "pre", 
-                    loader: "source-map-loader" 
-                },
-                { 
-                    test:/\.css$/,
+                    test:/.css$/,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        "css-loader"
+                        'css-loader'
                       ]
                 }
             ]
         },
         externals: {
-            "react": "React",
-            "react-dom": "ReactDOM"
+            'react': 'React',
+            'react-dom': 'ReactDOM'
         },
         plugins: [
-            new WriteFilePlugin(),
+            //new WriteFilePlugin(),
             new MiniCssExtractPlugin({ filename: flow.filenames.css })
         ],
     }
-
     if (!fs.existsSync('./build'))
         fs.mkdirSync('./build');
-
     return config;
 };

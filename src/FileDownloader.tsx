@@ -24,6 +24,7 @@ class FileDownloader extends FlowComponent {
 
     async downloadFile(e: any) {
 
+        let ms: any = window.navigator;
         const od: FlowObjectData = (this.getStateValue() as unknown) as FlowObjectData;
 
         let fileName: string;
@@ -55,18 +56,20 @@ class FileDownloader extends FlowComponent {
 
         const download = fileName + (extension.length > 0 ? '.' + extension : '');
 
-        if (window.navigator.msSaveOrOpenBlob) {
-
-            // IE11
-            window.navigator.msSaveOrOpenBlob(blob, download);
+        if (ms.msSaveOrOpenBlob) { // IE 10+
+            ms.msSaveOrOpenBlob(blob, download);
         } else {
-
-            // Google chome, Firefox, ....
-            const objectURL = URL.createObjectURL(blob);
-            this.anchor.download = download;
-            this.anchor.href = objectURL;
-            // this.anchor.click();
-
+            const link = document.createElement('a');
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', download);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
 
         const outcome: string = this.getAttribute('onClickOutcome', '');

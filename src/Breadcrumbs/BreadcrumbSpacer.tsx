@@ -8,7 +8,7 @@ export default class BreadcrumbSpacer extends React.Component<any, any> {
             <span
                 className="breadcrumb-spacer"
             >
-                ->
+                {"-"}
             </span>
         );
     }

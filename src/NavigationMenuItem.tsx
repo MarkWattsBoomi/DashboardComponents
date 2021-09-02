@@ -161,7 +161,7 @@ export class NavigationMenuItem extends React.Component<any, any> {
                         span = (
                             <span
                                 className={'nav-header-link' + hot} title={this.props.menuItem.properties.label.value}
-                                onClick={() => action(this.props.parent, calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}>
+                                onClick={() => action(calculateValue(this.props.parent, this.props.menuItem.properties.value.value))}>
                                 {this.props.menuItem.properties.label.value}
                             </span>
                             );

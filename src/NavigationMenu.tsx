@@ -99,7 +99,12 @@ export class NavigationMenu extends FlowPage {
             // loop over menu items
             const links: JSX.Element[] = [];
             for (const mi of menuItems.sort(eSortOrder.ascending, 'order')) {
-                links.push(<NavigationMenuItem parent={this} menuItem={mi} currentPage={'work-queues'}/>);
+                links.push(
+                <NavigationMenuItem 
+                    parent={this} 
+                    menuItem={mi} 
+                    currentPage={'work-queues'}/>
+                );
             }
             return (
                         <div className="nav-header">

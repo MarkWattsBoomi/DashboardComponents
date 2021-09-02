@@ -7,7 +7,6 @@ import {Chart} from 'react-google-charts';
 
 class GoogleChart extends FlowComponent {
 
-    outcomes: any;
     chart: any;
 
     constructor(props: any) {
