@@ -164,8 +164,7 @@ export class NavigationMenu extends FlowPage {
         request.stateToken = info.token;
 
         await manywho.connection.request(this, null, invokeurl , 'POST', this.tenantId, this.stateId, manywho.state.getAuthenticationToken(this.flowKey), request);
-        // await manywho.engine.sync(this.flowKey);
-        // manywho.engine.ping(this.flowKey);
+  
 
         return Promise.resolve();
     }
